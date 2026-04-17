@@ -27,7 +27,7 @@ export const env = {
 
     ai: {
         provider: process.env.AI_PROVIDER || "openai",
-        apiKey: process.env.OPENAI_API_KEY,
+        apiKey: process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY,
         model: process.env.AI_MODEL || "gpt-4o-mini",
     }
 };

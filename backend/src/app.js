@@ -9,6 +9,7 @@ import submissionRoutes from "./modules/submissions/submission.routes.js";
 import gigRoutes from "./modules/gigs/gig.routes.js";
 import matchingRoutes from "./modules/matching/matching.routes.js";
 import reviewRoutes from "./modules/reviews/review.routes.js";
+import aiRoutes from "./modules/ai/ai.routes.js";
 import passport from "./config/passport.js";
 
 
@@ -42,6 +43,7 @@ app.use("/api/submissions", submissionRoutes);
 app.use("/api/gigs", gigRoutes);
 app.use("/api/matching", matchingRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/ai", aiRoutes);
 app.use((req, res) => {
     res.status(404).json({
         success: false,
