@@ -6,14 +6,10 @@ import {
     createTask,
 } from "./task.controller.js";
 import { protect } from "../../middlewares/auth.middleware.js";
-
-import { protect } from "../../middlewares/auth.middleware.js";
-
-router.post("/start", protect, startTask);
-router.post("/submit", protect, submitTask);
-
-
 const router = express.Router();
+
+// router.post("/start", protect, startTask);
+// router.post("/submit", protect, submitTask);
 
 // 🎓 Student → generate task
 router.post("/generate", protect, generateAITask);

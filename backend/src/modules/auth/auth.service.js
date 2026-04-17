@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"; // ✅ use only ONE (bcrypt)
 import jwt from "jsonwebtoken";
-import User from "./auth.model.js";
+import { User } from "../users/user.model.js";
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../../config/jwt.js";
 
 // 🔥 Generate JWT Token
