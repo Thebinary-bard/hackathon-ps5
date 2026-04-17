@@ -1,0 +1,37 @@
+import {
+    getUserProfile,
+    updateUserProfile,
+    addSkillToUser,
+} from "./user.service.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+
+export const getProfile = asyncHandler(async (req, res, next) => {
+    const user = await getUserProfile(req.user.id);
+
+    res.json({
+        success: true,
+        data: user,
+    });
+});
+
+export const updateProfile = asyncHandler(async (req, res, next) => {
+    const user = await updateUserProfile(req.user.id, req.body);
+
+    res.json({
+        success: true,
+        message: "Profile updated",
+        data: user,
+    });
+});
+
+export const addSkill = asyncHandler(async (req, res, next) => {
+    const { skill } = req.body;
+
+    const user = await addSkillToUser(req.user.id, skill);
+
+    res.json({
+        success: true,
+        message: "Skill added",
+        data: user,
+    });
+});

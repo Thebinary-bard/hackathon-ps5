@@ -1,0 +1,11 @@
+# ⚙️ System Requirements
+
+This backend is built using Node.js. 
+As such, all package dependencies (like Express, Mongoose, Gemini SDK) are managed via `package.json`. 
+
+To run this application locally or in production, ensure your system meets the following prerequisites:
+
+- Node.js (v18.0.0 or higher)
+- npm (Node Package Manager) v9+ or yarn equivalent
+- MongoDB Database (Local instance or MongoDB Atlas cloud cluster)
+- Google Gemini API Key (For AI task generation and evaluation)
