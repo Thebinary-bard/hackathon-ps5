@@ -1,0 +1,28 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
+export default function OAuthSuccess() {
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token");
+        if (token) {
+            login(token);
+            navigate("/dashboard", { replace: true });
+        } else {
+            navigate("/login?error=oauth_failed", { replace: true });
+        }
+    }, []);
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-950">
+            <div className="flex flex-col items-center gap-4">
+                <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                <p className="text-gray-400 text-sm">Finishing sign-in...</p>
+            </div>
+        </div>
+    );
+}
