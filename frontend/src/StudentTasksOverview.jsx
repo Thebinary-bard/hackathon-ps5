@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
-import universalTasks from './data/tasks.json';
+import universalTasks from './data/student/tasks.json';
+import solvedTasksData from './data/student/solvedTasks.json';
 import { Link } from 'react-router-dom';
 
 export default function StudentTasksOverview() {
   const activeTasks = universalTasks.filter(t => t.status !== "Completed");
-  const solvedTasks = universalTasks.filter(t => t.status === "Completed");
+  const [expandedTaskId, setExpandedTaskId] = useState(null);
+
+  const toggleExpand = (id) => {
+    setExpandedTaskId(prev => prev === id ? null : id);
+  };
 
   return (
     <StudentDashboardLayout>
@@ -66,8 +71,8 @@ export default function StudentTasksOverview() {
                   <div className="text-sm text-on-surface-variant font-medium">
                     Points: <span className="text-on-surface">{task.points}</span>
                   </div>
-                  <Link to={`/student/tasks/${task.id}/solve`} className="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-xl font-semibold shadow-sm hover:shadow-md active:scale-95 transition-all flex items-center gap-2">
-                    Solve Task <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <Link to={`/student/tasks/${task.id}`} className="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-xl font-semibold shadow-sm hover:shadow-md active:scale-95 transition-all flex items-center gap-2">
+                    View Task <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                   </Link>
                 </div>
               </article>
@@ -79,29 +84,44 @@ export default function StudentTasksOverview() {
         <section>
           <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-8">Solved Tasks</h2>
           <div className="space-y-4">
-            {solvedTasks.map(task => (
-              <div key={task.id} className="group bg-surface-container-low hover:bg-surface-container-lowest rounded-xl p-4 md:p-6 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8">
-                <div className="flex items-center gap-6 flex-1">
-                  <div className="hidden md:flex w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined">check_circle</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-headline font-bold text-on-surface mb-1">{task.title}</h4>
-                    <div className="flex items-center gap-3 text-sm text-on-surface-variant">
-                      <span className="font-medium text-primary">{task.company}</span>
-                      <span className="w-1 h-1 rounded-full bg-outline-variant"></span>
-                      <span>Completed {task.completedDate}</span>
+            {solvedTasksData.map(task => (
+              <div key={task.id} className="bg-surface-container-low rounded-xl overflow-hidden shadow-sm transition-all duration-300 border border-outline-variant/10">
+                <div 
+                  className="group hover:bg-surface-container-lowest p-4 md:p-6 cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8"
+                  onClick={() => toggleExpand(task.id)}
+                >
+                  <div className="flex items-center gap-6 flex-1">
+                    <div className="hidden md:flex w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined">check_circle</span>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="text-lg font-headline font-bold text-on-surface">{task.title}</h4>
+                        <span className={`material-symbols-outlined text-on-surface-variant transition-transform duration-300 ${expandedTaskId === task.id ? 'rotate-180' : ''}`}>expand_more</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-on-surface-variant">
+                        <span className="font-medium text-primary">{task.company}</span>
+                        <span className="w-1 h-1 rounded-full bg-outline-variant"></span>
+                        <span>Completed {task.completedDate}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center justify-between md:justify-end gap-6 md:w-auto w-full border-t md:border-t-0 border-outline-variant/15 pt-4 md:pt-0">
-                  <div className="text-right">
-                    <span className="block text-xs text-on-surface-variant font-medium mb-0.5">Evaluation</span>
-                    <span className="text-lg font-headline font-bold text-tertiary">{task.metrics?.efficiency || "100%"}</span>
+                  <div className="flex items-center justify-between md:justify-end gap-6 md:w-auto w-full border-t md:border-t-0 border-outline-variant/15 pt-4 md:pt-0" onClick={(e) => e.stopPropagation()}>
+                    <div className="text-right">
+                      <span className="block text-xs text-on-surface-variant font-medium mb-0.5">Evaluation</span>
+                      <span className="text-lg font-headline font-bold text-tertiary">{task.metrics?.efficiency || "100%"}</span>
+                    </div>
+                    <Link to={`/student/tasks/${task.id}/result`} className="px-5 py-2 rounded-xl bg-surface-container-highest text-on-surface font-semibold text-sm hover:bg-surface-variant transition-colors">
+                      Results
+                    </Link>
                   </div>
-                  <Link to={`/student/tasks/${task.id}/result`} className="px-5 py-2 rounded-xl bg-surface-container-highest text-on-surface font-semibold text-sm hover:bg-surface-variant transition-colors">
-                    Results
-                  </Link>
+                </div>
+                {/* Expandable Details Section */}
+                <div className={`overflow-hidden transition-all duration-300 bg-surface-container-lowest border-t border-outline-variant/10 ${expandedTaskId === task.id ? 'max-h-96 opacity-100 p-6' : 'max-h-0 opacity-0 p-0'}`}>
+                  <h5 className="font-headline font-semibold text-on-surface mb-2 text-sm">Reviewer Feedback</h5>
+                  <p className="font-body text-sm text-on-surface-variant leading-relaxed">
+                    "{task.details}"
+                  </p>
                 </div>
               </div>
             ))}

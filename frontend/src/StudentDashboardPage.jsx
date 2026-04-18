@@ -1,30 +1,81 @@
 import React from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
-import userProfile from './data/userProfile.json';
+import userProfile from './data/student/userProfile.json';
+import graphData from './data/student/graph.json';
+
 const { mockUserData, portfolioProjects } = userProfile;
 
-
-
 export default function StudentDashboardPage() {
+  const { performanceHistory } = graphData;
+  const maxVal = Math.max(...performanceHistory);
+  const minVal = Math.min(...performanceHistory);
+  const range = maxVal - minVal === 0 ? 1 : maxVal - minVal;
+  
+  const points = performanceHistory.map((val, i) => {
+      const x = (i / (performanceHistory.length - 1)) * 100;
+      const y = 80 - (((val - minVal) / range) * 80);
+      return `${x},${y}`;
+  }).join(' ');
+  const areaPoints = `0,100 ${points} 100,100`;
+
+  const n = performanceHistory.length;
+  // Simple smoothing calculation measuring delta from start to end
+  const startAvg = n > 1 ? (performanceHistory[0] + performanceHistory[1]) / 2 : performanceHistory[0];
+  const endAvg = n > 1 ? (performanceHistory[n-2] + performanceHistory[n-1]) / 2 : performanceHistory[0];
+  const diff = endAvg - startAvg;
+  const trendText = diff > 5 ? "INCREASING" : diff < -5 ? "DECREASING" : "STEADY";
+  const trendColor = trendText === "INCREASING" ? "text-primary" : trendText === "DECREASING" ? "text-error" : "text-on-surface-variant";
   return (
     <StudentDashboardLayout>
       <div className="max-w-5xl mx-auto space-y-8">
-        <div className="flex justify-between border-b border-surface-container-high pb-6 items-start">
-          <div>
-            <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-primary/10">
+        <div className="bg-surface-container-lowest rounded-xl p-8 relative overflow-hidden group hover:scale-[1.01] transition-transform duration-300 shadow-sm border border-outline-variant/20 -mx-4 md:mx-0">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-secondary-container rounded-bl-full -mr-16 -mt-16 opacity-50"></div>
+          <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left relative z-10 gap-6">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-surface shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)] flex-shrink-0">
               <div className="w-full h-full flex items-center justify-center bg-primary-fixed text-on-primary-fixed">
-                <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>person</span>
+                <span className="material-symbols-outlined text-6xl" style={{ fontVariationSettings: "'FILL' 1" }}>person</span>
               </div>
             </div>
-            <h1 className="font-headline text-5xl font-extrabold text-on-surface tracking-tight">{mockUserData.name}</h1>
-            <p className="font-body text-lg text-on-surface-variant mt-2">{mockUserData.title}</p>
-          </div>
-          <div className="flex space-x-3">
-            {mockUserData.tags.map((tag, i) => (
-              <span key={i} className={`px-4 py-1.5 rounded-full font-body text-sm font-medium ${tag === 'Immediate' ? 'bg-[#e6f4ea] text-[#137333]' : 'bg-secondary-container text-on-secondary-container'}`}>
-                {tag}
-              </span>
-            ))}
+            <div className="flex-1 mt-2">
+              <h1 className="font-headline text-3xl font-extrabold text-on-surface mb-2">{mockUserData.name}</h1>
+              <p className="font-body text-on-surface-variant text-lg mb-4">{mockUserData.title}</p>
+              <div className="flex gap-2 flex-wrap justify-center md:justify-start">
+                {mockUserData.tags.map((tag, i) => (
+                  <span key={i} className={`px-4 py-1.5 rounded-full font-label text-xs font-semibold ${tag === 'Immediate' ? 'bg-[#e6f4ea] text-[#137333]' : 'bg-secondary-container text-on-secondary-container'}`}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            {/* Graph Visualizer Area */}
+            <div className="w-full md:w-72 mt-6 md:mt-0 relative group/graph cursor-pointer flex items-end">
+              {/* Y-axis label */}
+              <div className="flex flex-col justify-center items-center mr-3 h-24">
+                <span className="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Skill</span>
+              </div>
+              <div className="flex-1 flex flex-col relative h-32 justify-end pt-8">
+                <div className="flex justify-between items-center mb-2 w-full text-[10px] font-bold text-on-surface-variant font-label uppercase tracking-widest absolute top-0 left-0 drop-shadow-sm z-10">
+                  <span>Performance</span>
+                  <span className={`${trendColor} group-hover/graph:-translate-y-0.5 transition-transform`}>{trendText}</span>
+                </div>
+                <svg className="w-full h-16 drop-shadow-sm overflow-visible text-primary" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="gradientArea" x1="0" y1="0" x2="0" y2="1">
+                       <stop offset="0%" stopColor="currentColor" stopOpacity="0.25"/>
+                       <stop offset="100%" stopColor="currentColor" stopOpacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <polygon fill="url(#gradientArea)" points={areaPoints} className="transition-all duration-1000 ease-out" />
+                  <polyline fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={points} vectorEffect="non-scaling-stroke" className="group-hover/graph:stroke-[4] transition-all duration-300"/>
+                  {/* Decorative End Point */}
+                  <circle cx="100" cy={80 - (((performanceHistory[performanceHistory.length-1] - minVal) / range) * 80)} r="4" fill="currentColor" stroke="var(--surface-container-lowest)" strokeWidth="1.5" className="transform origin-center hover:scale-125 transition-transform duration-300"/>
+                </svg>
+                {/* X-axis label */}
+                <div className="w-full text-center mt-3 border-t border-outline-variant/30 pt-1">
+                  <span className="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">Time</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -57,14 +108,14 @@ export default function StudentDashboardPage() {
             <div className="bg-surface-container-low p-6 rounded-2xl shadow-sm hover:bg-surface-container-lowest transition-colors duration-300 flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>smart_display</span>
                 </div>
                 <div>
-                  <h4 className="font-headline text-md font-bold text-on-surface">Resume</h4>
-                  <p className="font-body text-sm text-on-surface-variant">Last updated: {mockUserData.resumeLastUpdated}</p>
+                  <h4 className="font-headline text-md font-bold text-on-surface">Intro Video</h4>
+                  <p className="font-body text-sm text-on-surface-variant">Last updated: {mockUserData.resumeLastUpdated || '2 days ago'}</p>
                 </div>
               </div>
-              <a href={mockUserData.resumeLink} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-container font-body text-sm font-semibold transition-colors">Update / View</a>
+              <a href="#" className="text-primary hover:text-primary-container font-body text-sm font-semibold transition-colors">Update / View</a>
             </div>
 
             <div className="bg-surface-container-low p-6 rounded-2xl shadow-sm hover:bg-surface-container-lowest transition-colors duration-300 flex items-center justify-between">

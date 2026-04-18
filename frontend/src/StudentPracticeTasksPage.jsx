@@ -23,7 +23,7 @@ const defaultTask = {
   ]
 };
 
-export default function StudentTaskSolvePage() {
+export default function StudentPracticeTasksPage() {
   const { id } = useParams();
 
   const task = universalTasks.find(t => t.id === id) || defaultTask;
@@ -52,9 +52,9 @@ export default function StudentTaskSolvePage() {
         {/* Light Theme Container Wrapper */}
         <div className="flex-1 bg-surface-container-lowest text-on-surface rounded-3xl p-8 overflow-y-auto shadow-sm relative font-body border border-outline-variant/20">
           
-          <Link to="/student/tasks" className="text-on-surface-variant hover:text-primary flex items-center gap-2 mb-6 text-sm font-medium transition-colors w-fit">
+          <Link to="/student/dashboard" className="text-on-surface-variant hover:text-primary flex items-center gap-2 mb-6 text-sm font-medium transition-colors w-fit">
             <span className="material-symbols-outlined text-sm">arrow_back</span>
-            Back to Active Tasks
+            Back to Dashboard
           </Link>
 
           <header className="mb-8 flex flex-col md:flex-row md:items-start justify-between gap-6">
@@ -151,9 +151,9 @@ export default function StudentTaskSolvePage() {
                   <button className="text-gray-300 font-semibold text-sm hover:text-white transition-colors">
                     Run Tests
                   </button>
-                  <Link to={`/student/tasks/${task.id || 'current'}/submit`} className="bg-gradient-to-r from-[#D4FF9D] to-[#98EB59] text-[#121413] px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-[0_0_20px_-5px_rgba(152,235,89,0.4)]">
+                  <Link to="/student/dashboard" onClick={() => alert('Practice solution submitted locally!')} className="bg-gradient-to-r from-[#D4FF9D] to-[#98EB59] text-[#121413] px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-[0_0_20px_-5px_rgba(152,235,89,0.4)]">
                     <span className="material-symbols-outlined text-[18px]">cloud_upload</span>
-                    Submit Solution
+                    Complete Practice
                   </Link>
                 </div>
               </div>

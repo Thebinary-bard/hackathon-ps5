@@ -1,0 +1,29 @@
+[
+  {
+    "id": 4,
+    "name": "Alexander Wei",
+    "major": "Software Engineering",
+    "role": "Software Engineering",
+    "matchScore": 96,
+    "avatar": "",
+    "imageUrl": ""
+  },
+  {
+    "id": 5,
+    "name": "Sofia Rossi",
+    "major": "Backend Architecture",
+    "role": "Backend Architecture",
+    "matchScore": 92,
+    "avatar": "",
+    "imageUrl": ""
+  },
+  {
+    "id": 6,
+    "name": "Jamal Kingston",
+    "major": "Product Management",
+    "role": "Product Management",
+    "matchScore": 90,
+    "avatar": "",
+    "imageUrl": ""
+  }
+]

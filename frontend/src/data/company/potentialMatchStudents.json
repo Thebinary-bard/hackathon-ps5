@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Elena Rostova",
+    "role": "UX Research & Product Design",
+    "matchScore": 98,
+    "skills": [
+      "User Testing",
+      "Figma",
+      "Data Visualization",
+      "+2 more"
+    ],
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCNrxOwejhwk6MeieoTbVIfnKzuLTN6KPoha9S4E8W3CRiRu9NG6EB-mPOfRrjAz7XWe_JeGfr6sCT-Dr6LqJ3x400i-lbDtxTrofRMxIgOXf9y2dNIHYYwHkrf9kME9oNjfdVrcO7TQnuQ92_8jxNcttUO0HiXytSyuOh1QAMpTwUUMcK2Tq08jsb_teWFoQZg9wHXvBnZX_sqgO8fubiKzdAsNa1uARxqcIZOvPAGLRWjiNKZJpFAKOptp6YtofB6ki6F_RBur3-p",
+    "superpower": "fastest delivery"
+  },
+  {
+    "id": 2,
+    "name": "Marcus Chen",
+    "role": "Full-Stack Engineering",
+    "matchScore": 94,
+    "skills": [
+      "React.js",
+      "Node & Express",
+      "PostgreSQL"
+    ],
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDD40z5JOglnoC2dq04omI6eQjfcDTUoLPD8MVKaQIBiV3enyslWXKf00hjWwI3KVvvMFoMB5LoB6LXy2B990YDTgbHxvFWUTTD1ILyLwzEqTHmWfxaTUv7moIZqQ7Op9J85JfrxBD4IPenRW3RGOGuGqFGHp1GsdxWB-_wXmt1lsalxFzCDDZvJJUI_LOVnNba_BT58sY7FTsgXEJ0NvsX86pFBSuQZvjLT5dl8eIgS_EmR9nF-uDrgq9xA7VUceRMU3R_K9WRTpgT",
+    "superpower": "best in under pressure"
+  },
+  {
+    "id": 3,
+    "name": "Sarah Jenkins",
+    "role": "Growth Marketing Strategy",
+    "matchScore": 82,
+    "skills": [
+      "SEO & Content",
+      "Google Analytics",
+      "+1 more"
+    ],
+    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuC9BRAQLOm2topwqqk2QZeKSzQtZXtQTh13tRLGh6hnEUj4n3CIRXHFkHKgENGlkBk5aPYNtsbMJEsl9arjJGnDPrPpxHl1fR-MNmsxQnqLGhs_8PUPANcTkQrTUT7azqfp6GvTFsVbMp5UugMivEKpLKJXM1wmnwuL29IEi8LMaHmhG2jsBLAIm5cHSFYQyDhrIxuE95aIj37SiP-1VhONmxiI3ZP-djyCneIL4o5Ro2CTljLdEYKC_ylPZGfGWeYLme_QfDxjUGsa",
+    "superpower": "most consistent"
+  }
+]
