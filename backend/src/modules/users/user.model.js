@@ -78,6 +78,13 @@ const userSchema = new mongoose.Schema(
                 link: String,
             },
         ],
+
+        title: { type: String, default: "" },
+        tags: [String],
+        githubUsername: { type: String, default: "" },
+        githubLink: { type: String, default: "" },
+        introVideoLink: { type: String, default: "" },
+        resumeLastUpdated: { type: String, default: "" },
     },
     { timestamps: true }
 );

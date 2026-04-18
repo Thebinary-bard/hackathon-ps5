@@ -2,21 +2,20 @@ import mongoose from "mongoose";
 
 const submissionSchema = new mongoose.Schema(
     {
-        user: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
 
-        task: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Task",
+        taskId: {
+            type: String, // String to handle custom IDs like PRC-101
             required: true,
         },
 
         content: {
             type: String, // link / text / github / drive
-            required: true,
+            default: "",
         },
 
         // 🧠 AI Evaluation Output
@@ -35,6 +34,21 @@ const submissionSchema = new mongoose.Schema(
             enum: ["pending", "evaluated"],
             default: "pending",
         },
+
+        // 📊 Behavior Tracking
+        startedAt: Date,
+        firstActionAt: Date,
+        submittedAt: Date,
+        editsCount: {
+            type: Number,
+            default: 0,
+        },
+        messages: [
+            {
+                from: { type: String, enum: ["ai", "user"] },
+                time: { type: Date, default: Date.now }
+            }
+        ],
     },
     { timestamps: true }
 );

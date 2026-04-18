@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
-import universalTasks from './data/student/tasks.json';
-import solvedTasksData from './data/student/solvedTasks.json';
+import universalTasks from '../../data/student/tasks.json';
+import solvedTasksData from '../../data/student/solvedTasks.json';
 import { Link } from 'react-router-dom';
 
 export default function StudentTasksOverview() {
