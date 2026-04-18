@@ -306,11 +306,37 @@ export default function StudentDashboardPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {portfolio.map((project, idx) => (
-                <a key={idx} href={project.link || '#'} target="_blank" rel="noopener noreferrer" className="group relative rounded-xl overflow-hidden aspect-video cursor-pointer block bg-surface-container-lowest border border-outline-variant/10">
-                  <div className="w-full h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent">
-                      <p className="font-headline text-white font-semibold text-lg">{project.title}</p>
-                      <p className="font-body text-white/80 text-sm line-clamp-2">{project.description}</p>
-                  </div>
+                <a
+                  key={idx}
+                  href={project.link || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative rounded-xl overflow-hidden aspect-video cursor-pointer block border border-outline-variant/10"
+                  style={project.image ? {
+                    backgroundImage: `url(${project.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  } : {
+                    background: 'linear-gradient(135deg, var(--surface-container-low), var(--surface-container-highest))'
+                  }}
+                >
+                  {project.isUpload && !project.image ? (
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-on-surface-variant group-hover:text-primary transition-colors">
+                      <span className="material-symbols-outlined text-4xl">add_photo_alternate</span>
+                      <p className="font-body text-sm font-semibold">Upload Project</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <p className="font-headline text-white font-semibold text-lg drop-shadow">{project.title}</p>
+                      {project.description && <p className="font-body text-white/80 text-sm line-clamp-2 drop-shadow">{project.description}</p>}
+                    </div>
+                  )}
+                  {/* Always show title bar at bottom */}
+                  {!project.isUpload && (
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent group-hover:opacity-0 transition-opacity duration-300">
+                      <p className="font-headline text-white font-semibold text-sm drop-shadow truncate">{project.title}</p>
+                    </div>
+                  )}
                 </a>
               ))}
             </div>

@@ -1,24 +1,36 @@
 import React from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
 import universalTasks from '../../data/student/tasks.json';
+import solvedTasks from '../../data/student/solvedTasks.json';
 import { Link, useParams, Navigate, useLocation } from 'react-router-dom';
 
 export default function TaskResultPage() {
   const { id } = useParams();
   const location = useLocation();
-  const task = universalTasks.find(t => t.id === id) || (id === "PRC-101" ? { title: "Algorithm Refinement" } : null);
+  // Search active tasks (string IDs like "TASK-8921") AND solved tasks (numeric IDs like 101)
+  // Use loose == so that "101" matches 101
+  // eslint-disable-next-line eqeqeq
+  const task = universalTasks.find(t => t.id == id)
+    // eslint-disable-next-line eqeqeq
+    || solvedTasks.find(t => t.id == id)
+    || (id === "PRC-101" ? { title: "Algorithm Refinement" } : null);
   const result = location.state?.result;
 
   if (!task) {
     return <Navigate to="/student/tasks" replace />;
   }
 
-  // Use real data from result if available, otherwise fallback
-  const overallScore = result?.trustScore?.trustScore || 94;
-  const behaviorScore = result?.behaviorScore || 82;
-  const insights = result?.insights || ["Quick to start and decisive", "Iterative and improves work"];
+  // Parse efficiency from task metrics (e.g. "98%") → number, or fall back to result or default
+  const taskEfficiency = task.metrics?.efficiency
+    ? parseInt(task.metrics.efficiency, 10)
+    : null;
+
+  // Use real data from result (solve flow) → then task's own JSON data → then defaults
+  const overallScore = result?.trustScore?.trustScore ?? taskEfficiency ?? 94;
+  const behaviorScore = result?.behaviorScore ?? taskEfficiency ?? 82;
+  const insights = result?.insights || (task.details ? [task.details] : ["Quick to start and decisive", "Iterative and improves work"]);
   const breakdown = result?.trustScore?.breakdown || { execution: 85, communication: 70, adaptability: 90, reliability: 88 };
-  const insightText = result?.trustScore?.insight || "Strong executor, slightly slow in communication";
+  const insightText = result?.trustScore?.insight || task.details || "Strong executor, slightly slow in communication";
 
   return (
     <StudentDashboardLayout>
