@@ -60,10 +60,10 @@ export default {
         "border": '#E0E0E0',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        "headline": ["Manrope"],
-        "body": ["Inter"],
-        "label": ["Inter"]
+        sans: ["'Jomolhari'", 'serif'],
+        "headline": ["'Jomolhari'", 'serif'],
+        "body": ["'Jomolhari'", 'serif'],
+        "label": ["'Jomolhari'", 'serif']
       }
     },
   },

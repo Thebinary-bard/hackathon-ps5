@@ -9,6 +9,11 @@
     ],
     "trustScore": 85,
     "percentile": "Top 15% in Design",
+    "metrics": {
+      "skillsEvaluated": 18,
+      "aiAptitudeTest": 85,
+      "cgpa": 8.5
+    },
     "skills": [
       "Figma",
       "React",

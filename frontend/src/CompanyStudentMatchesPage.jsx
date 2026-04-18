@@ -23,7 +23,7 @@ export default function CompanyStudentMatchesPage() {
 {/* Student Match List (Architectural Cards) */}
 <div className="flex flex-col gap-6">
 {studentMatches.map(match => (
-    <div key={match.id} className="bg-surface-container-low rounded-[1rem] p-8 flex items-center gap-8 relative group transition-all duration-300 hover:bg-surface-container-lowest hover:shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)] hover:-translate-y-1">
+    <div key={match.id} className="bg-surface-container-low rounded-[1rem] p-8 flex items-center gap-8 relative group transition-all duration-400 hover:bg-surface-container-lowest hover:shadow-[0_25px_50px_-12px_rgba(0,80,203,0.18)] hover:-translate-y-2">
         <div className="relative shrink-0 -mt-4 -ml-4">
             <img alt={match.name} className="w-24 h-24 rounded-full object-cover shadow-[0_20px_40px_-10px_rgba(0,24,73,0.15)] ring-4 ring-surface-container-lowest" src={match.imageUrl}/>
         </div>
@@ -53,8 +53,8 @@ export default function CompanyStudentMatchesPage() {
                 </div>
                 <span className="font-body text-sm text-on-surface-variant font-medium">Match Score</span>
             </div>
-            <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-[0.75rem] font-label font-semibold text-sm hover:opacity-90 transition-opacity">
-                View Profile
+            <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-[0.75rem] font-label font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 flex items-center gap-2">
+                View Profile <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </button>
         </div>
     </div>

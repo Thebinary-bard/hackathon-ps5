@@ -57,9 +57,9 @@ export default function StudentDashboardLayout({ children }) {
   const getSidebarClass = (targetPath) => {
     const isActive = path === targetPath || (targetPath !== '/student/dashboard' && path.startsWith(targetPath));
     if (isActive) {
-      return "flex items-center space-x-3 text-[#001849] bg-[#ffffff]/50 py-3 px-6 rounded-r-full font-body text-sm font-semibold cursor-pointer active:scale-98 transition-transform duration-200";
+      return "flex items-center space-x-3 text-[#001849] bg-[#ffffff]/50 py-3 px-6 rounded-r-full font-body text-base font-bold cursor-pointer active:scale-98 transition-transform duration-200";
     }
-    return "flex items-center space-x-3 text-[#424656] py-3 px-6 hover:bg-[#f6f3f2]/50 rounded-r-full font-body text-sm font-semibold cursor-pointer hover:translate-x-1 transition-transform duration-200";
+    return "flex items-center space-x-3 text-[#424656] py-3 px-6 hover:bg-[#f6f3f2]/50 rounded-r-full font-body text-base font-bold cursor-pointer hover:translate-x-1 transition-transform duration-200";
   };
 
   return (
@@ -94,12 +94,12 @@ export default function StudentDashboardLayout({ children }) {
         </nav>
         <div className="px-6 pb-6 pt-4 space-y-2">
           <Link className="flex items-center space-x-3 text-error py-2 hover:translate-x-1 transition-transform duration-200" to="/">
-            <span className="material-symbols-outlined text-sm">logout</span>
-            <span className="text-sm font-semibold">Logout</span>
+            <span className="material-symbols-outlined text-base">logout</span>
+            <span className="text-base font-bold">Logout</span>
           </Link>
         </div>
       </aside>
-      <main className="flex-1 ml-0 md:ml-64 mr-0 lg:mr-80 pt-24 px-8 pb-12 overflow-y-auto bg-surface min-h-screen relative z-10 w-full lg:w-auto overflow-x-hidden">
+      <main className="flex-1 ml-0 md:ml-64 mr-0 lg:mr-80 pt-24 px-8 pb-12 overflow-y-auto bg-surface min-h-screen relative z-10 w-full lg:w-auto overflow-x-hidden animate-slide-down" style={{animationDuration: '0.5s'}}>
         {children}
       </main>      <aside className="fixed right-0 top-0 h-screen w-80 border-l border-white/10 bg-[#fcf9f8]/90 backdrop-blur-2xl shadow-2xl flex flex-col p-6 gap-4 z-50 hidden lg:flex">
         <div className="flex items-center space-x-3 mb-4">
@@ -114,14 +114,16 @@ export default function StudentDashboardLayout({ children }) {
         <div className="flex-1 overflow-y-auto space-y-4 pr-2">
           {chatHistory.map((msg, index) => (
             msg.role === 'model' ? (
-              <div key={index} className="bg-surface-container-lowest p-4 rounded-2xl rounded-tl-sm shadow-sm border border-surface-variant/50 relative">
-                <div style={{ position: 'absolute', top: -10, left: -10, width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(to bottom right, #0050cb, #0066ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 12 }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 14 }}>smart_toy</span>
+              <div key={index} className="flex gap-2 items-start animate-slide-down" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#0050cb] to-[#0066ff] flex-shrink-0 flex items-center justify-center text-white mt-1 shadow-sm">
+                  <span className="material-symbols-outlined text-[12px]">smart_toy</span>
                 </div>
-                <p className="font-body text-sm text-on-surface whitespace-pre-wrap">{msg.text}</p>
+                <div className="bg-surface-container-lowest p-3 rounded-2xl rounded-tl-none shadow-sm border border-surface-variant/50">
+                  <p className="font-body text-sm text-on-surface whitespace-pre-wrap">{msg.text}</p>
+                </div>
               </div>
             ) : (
-              <div key={index} className="bg-primary/5 p-4 rounded-2xl rounded-tr-sm self-end ml-8">
+              <div key={index} className="bg-primary/5 p-3 rounded-2xl rounded-tr-none self-end ml-8 animate-slide-down">
                 <p className="font-body text-sm text-on-surface whitespace-pre-wrap">{msg.text}</p>
               </div>
             )

@@ -24,7 +24,7 @@ export default function StudentOpportunitiesPage() {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {jobOpportunities.map(job => (
-          <article key={job.id} className="bg-surface-container-low rounded-xl p-8 hover:bg-surface-container-lowest hover:scale-[1.01] transition-all duration-300 relative group overflow-hidden flex flex-col h-full">
+          <article key={job.id} className="bg-surface-container-low rounded-xl p-8 hover:bg-surface-container-lowest hover:-translate-y-2 hover:shadow-[0_20px_40px_-12px_rgba(0,80,203,0.18)] transition-all duration-400 relative group overflow-hidden flex flex-col h-full cursor-pointer">
             <div className="flex justify-between items-start mb-6">
               <div className="flex gap-4 items-center">
                 <div className="w-12 h-12 rounded-lg bg-white p-2 shadow-sm flex items-center justify-center relative z-10">
@@ -52,15 +52,15 @@ export default function StudentOpportunitiesPage() {
               <p className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-3">Required Skills</p>
               <div className="flex flex-wrap gap-2">
                 {job.skills.map(skill => (
-                  <span key={skill} className="bg-surface px-3 py-1 rounded-full text-xs text-on-surface">{skill}</span>
+                  <span key={skill} className="bg-surface px-3 py-1 rounded-full text-xs text-on-surface hover:bg-primary hover:text-on-primary transition-colors duration-200 cursor-default">{skill}</span>
                 ))}
               </div>
             </div>
             
             <div className="flex items-center justify-between border-t border-outline-variant/15 pt-4">
               <span className="text-sm font-semibold text-on-background">{job.salaryStr}</span>
-              <button className="text-primary font-semibold text-sm hover:text-primary-container transition-colors flex items-center gap-1"> 
-                View Details <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              <button className="text-primary font-semibold text-sm hover:text-on-primary hover:bg-primary px-3 py-1 rounded-full transition-all duration-200 flex items-center gap-1"> 
+                View Details <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </button>
             </div>
             

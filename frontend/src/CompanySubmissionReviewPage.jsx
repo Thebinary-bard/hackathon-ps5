@@ -35,7 +35,7 @@ export default function CompanySubmissionReviewPage() {
     const s = statuses[index % statuses.length];
     
     return (
-        <div key={index} className="bg-surface-container-low rounded-[1.5rem] p-6 hover:bg-surface-container-lowest hover:scale-[1.01] transition-all duration-300 shadow-[0_40px_40px_-15px_rgba(0,24,73,0.02)] hover:shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)] flex items-center justify-between group relative overflow-hidden">
+        <div key={index} className="bg-surface-container-low rounded-[1.5rem] p-6 hover:bg-surface-container-lowest hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(0,80,203,0.15)] transition-all duration-400 shadow-[0_40px_40px_-15px_rgba(0,24,73,0.02)] flex items-center justify-between group relative overflow-hidden">
             {s.priority && <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-primary-container"></div>}
             <div className="flex items-center gap-6">
                 <div className="w-16 h-16 rounded-full bg-surface overflow-hidden p-1 shadow-sm flex-shrink-0">
@@ -65,7 +65,7 @@ export default function CompanySubmissionReviewPage() {
                         <div className={`h-full rounded-full ${s.bg} ${s.width}`}></div>
                     </div>
                 </div>
-                <button className="bg-surface-container-highest text-on-surface font-headline font-semibold px-6 py-3 rounded-xl hover:bg-surface-variant transition-colors whitespace-nowrap">
+                <button className="bg-surface-container-highest text-on-surface font-headline font-semibold px-6 py-3 rounded-xl hover:bg-primary hover:text-on-primary transition-all duration-200 whitespace-nowrap hover:-translate-y-0.5 hover:shadow-md">
                     View Work
                 </button>
             </div>
