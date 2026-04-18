@@ -2,11 +2,12 @@ import { registerUser, loginUser } from "./auth.service.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
 export const register = asyncHandler(async (req, res, next) => {
-    const user = await registerUser(req.body);
+    const { user, token } = await registerUser(req.body);
 
     res.status(201).json({
         success: true,
         message: "User registered successfully",
+        token,
         data: user,
     });
 });

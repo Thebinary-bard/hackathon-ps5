@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import passport from "./config/passport.js";
 
 // Routes
 import authRoutes from "./modules/auth/auth.routes.js";
@@ -9,18 +10,19 @@ import submissionRoutes from "./modules/submissions/submission.routes.js";
 import gigRoutes from "./modules/gigs/gig.routes.js";
 import matchingRoutes from "./modules/matching/matching.routes.js";
 import reviewRoutes from "./modules/reviews/review.routes.js";
-import passport from "./config/passport.js";
-
-
 
 const app = express();
 
-app.use(passport.initialize());
 /**
  * 🔧 Middlewares
  */
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+
 app.use(express.json());
+app.use(passport.initialize());
 
 /**
  * 🩺 Health check
@@ -33,7 +35,7 @@ app.get("/", (req, res) => {
 });
 
 /**
- * 📦 API Routes
+ * 📦 API Routes (IMPORTANT: all prefixed with /api)
  */
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -42,6 +44,10 @@ app.use("/api/submissions", submissionRoutes);
 app.use("/api/gigs", gigRoutes);
 app.use("/api/matching", matchingRoutes);
 app.use("/api/reviews", reviewRoutes);
+
+/**
+ * ❌ 404 handler
+ */
 app.use((req, res) => {
     res.status(404).json({
         success: false,

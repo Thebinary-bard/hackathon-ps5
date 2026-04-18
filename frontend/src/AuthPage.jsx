@@ -33,12 +33,13 @@ export default function AuthPage() {
 
       if (response.ok && data.success !== false) {
         localStorage.setItem('token', data.token);
-        navigate(role === 'student' ? '/student/dashboard' : '/company/dashboard');
+        if (data.data) localStorage.setItem('user', JSON.stringify(data.data));
+        navigate(data.data?.role === 'business' || data.data?.role === 'company' || role === 'company' ? '/company/dashboard' : '/student/dashboard');
       } else {
         setError(data.message || 'Login failed');
       }
     } catch (err) {
-      setError('An error occurred during login');
+      setError('Network error. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -68,7 +69,7 @@ export default function AuthPage() {
 <p className="text-on-surface-variant font-body" >Enter your details to access your portal.</p>
 </div>
 <form className="space-y-6" onSubmit={handleLogin}>
-
+{error && <div className="text-red-500 text-sm font-medium p-3 bg-red-50 rounded-lg">{error}</div>}
 <div className="space-y-2">
 <span className="text-sm font-label font-medium text-on-surface-variant block" >I am logging in as a...</span>
 <div className="flex p-1 bg-surface-container-low rounded-full w-full relative isolation-auto">
@@ -116,7 +117,6 @@ export default function AuthPage() {
         Login with Google
     </button>
 </div><div className="pt-4">
-{error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 <button disabled={loading} className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-base py-4 rounded-xl hover:brightness-110 active:scale-[0.98] shadow-[0_8px_16px_-4px_rgba(0,80,203,0.2)] transition-all duration-200 flex justify-center items-center gap-2 disabled:opacity-50" type="submit" >
                         {loading ? 'Logging in...' : 'Login to Portal'}
                         <span className="material-symbols-outlined text-xl" >arrow_forward</span>

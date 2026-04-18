@@ -32,7 +32,10 @@ export const registerUser = async ({ name, email, password, role }) => {
         role,
     });
 
-    return user;
+    user.password = undefined;
+    const token = generateToken(user);
+
+    return { user, token };
 };
 
 // 🔥 Login User
