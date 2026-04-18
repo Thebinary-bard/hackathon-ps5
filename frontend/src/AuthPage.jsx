@@ -1,9 +1,52 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function AuthPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [role, setRole] = useState(location.state?.role || 'student');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('error') === 'google_auth_failed') {
+      setError('Google authentication failed. Please check your developer console credentials setup.');
+    }
+  }, [location]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!email || !password) return;
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+
+      if (response.ok && data.success !== false) {
+        localStorage.setItem('token', data.token);
+        navigate(role === 'student' ? '/student/dashboard' : '/company/dashboard');
+      } else {
+        setError(data.message || 'Login failed');
+      }
+    } catch (err) {
+      setError('An error occurred during login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:5000/api/auth/google';
+  };
 
   return (
     <div className="bg-background text-on-background font-body antialiased min-h-screen w-full flex selection:bg-primary-container selection:text-on-primary-container">
@@ -24,7 +67,7 @@ export default function AuthPage() {
 <h1 className="font-headline text-4xl font-bold tracking-tight text-on-background" >Welcome back</h1>
 <p className="text-on-surface-variant font-body" >Enter your details to access your portal.</p>
 </div>
-<form className="space-y-6">
+<form className="space-y-6" onSubmit={handleLogin}>
 
 <div className="space-y-2">
 <span className="text-sm font-label font-medium text-on-surface-variant block" >I am logging in as a...</span>
@@ -45,7 +88,7 @@ export default function AuthPage() {
 <label className="text-sm font-label font-medium text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="email" >Email ID</label>
 <div className="relative flex items-center">
 <span className="material-symbols-outlined absolute left-4 text-on-surface-variant opacity-70" >mail</span>
-<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="email" placeholder="name@university.edu" type="email" />
+<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="email" placeholder="name@university.edu" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 </div>
 </div>
 
@@ -56,14 +99,14 @@ export default function AuthPage() {
 </div>
 <div className="relative flex items-center">
 <span className="material-symbols-outlined absolute left-4 text-on-surface-variant opacity-70" >lock</span>
-<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="password" placeholder="••••••••" type="password" />
+<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="password" placeholder="••••••••" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 </div>
 </div>
 </div>
 
 
 <div className="pt-2">
-<button className="w-full bg-white border border-outline-variant text-on-surface font-label font-bold text-base py-4 rounded-xl hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-3 shadow-sm" type="button" >
+<button onClick={handleGoogleLogin} className="w-full bg-white border border-outline-variant text-on-surface font-label font-bold text-base py-4 rounded-xl hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-3 shadow-sm" type="button" >
 <svg className="w-5 h-5" viewBox="0 0 24 24">
 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -73,12 +116,11 @@ export default function AuthPage() {
         Login with Google
     </button>
 </div><div className="pt-4">
-<Link to={role === 'student' ? '/student/dashboard' : '/company/dashboard'} className="w-full block">
-<button className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-base py-4 rounded-xl hover:brightness-110 active:scale-[0.98] shadow-[0_8px_16px_-4px_rgba(0,80,203,0.2)] transition-all duration-200 flex justify-center items-center gap-2" type="button" >
-                        Login to Portal
+{error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+<button disabled={loading} className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-base py-4 rounded-xl hover:brightness-110 active:scale-[0.98] shadow-[0_8px_16px_-4px_rgba(0,80,203,0.2)] transition-all duration-200 flex justify-center items-center gap-2 disabled:opacity-50" type="submit" >
+                        {loading ? 'Logging in...' : 'Login to Portal'}
                         <span className="material-symbols-outlined text-xl" >arrow_forward</span>
 </button>
-</Link>
 </div>
 <div className="text-center pt-6">
 <p className="text-sm font-label text-on-surface-variant" >Don't have an account? <a className="text-primary font-semibold hover:underline underline-offset-4 decoration-primary/30" href="#" >Apply now</a></p>

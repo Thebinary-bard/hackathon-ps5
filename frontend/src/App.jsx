@@ -10,12 +10,12 @@ import StudentTaskSolvePage from './StudentTaskSolvePage';
 import StudentPracticeTasksPage from './StudentPracticeTasksPage';
 import StudentTaskDetailPage from './StudentTaskDetailPage';
 import StudentTaskResultPage from './StudentTaskResultPage';
-
 import CompanyDashboardPage from './CompanyDashboardPage';
 import CompanyStudentMatchesPage from './CompanyStudentMatchesPage';
 import CompanyTasksDashboard from './CompanyTasksDashboard';
 import CompanySubmissionReviewPage from './CompanySubmissionReviewPage';
 import CompanyHiringDashboard from './CompanyHiringDashboard';
+import OAuthCallback from './OAuthCallback';
 import './App.css';
 
 function ScrollToTop() {
@@ -35,6 +35,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/oauth-success" element={<OAuthCallback />} />
         
         {/* Student Routes */}
         <Route path="/student/dashboard" element={<StudentDashboardPage />} />
