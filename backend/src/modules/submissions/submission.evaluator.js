@@ -1,15 +1,16 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { env } from "../../config/env.js";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import {
     evaluateSubmissionPrompt,
     cleanJSON,
 } from "../../config/ai.config.js";
 
 /**
- * 🧠 Initialize Gemini
+ * 🧠 Initialize Gemini via LangChain
  */
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const llm = new ChatGoogleGenerativeAI({
+    model: "gemini-2.5-flash",
+    apiKey: process.env.GOOGLE_API_KEY,
+});
 
 /**
  * 🧠 Evaluate submission using Gemini
@@ -18,9 +19,8 @@ export const evaluateWithAI = async (task, submissionContent) => {
     try {
         const prompt = evaluateSubmissionPrompt(task, submissionContent);
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+        const result = await llm.invoke(prompt);
+        const text = result.content;
 
         const cleaned = cleanJSON(text);
 

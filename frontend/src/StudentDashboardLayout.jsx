@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import userProfile from './data/userProfile.json';
 
@@ -9,50 +9,114 @@ export default function StudentDashboardLayout({ children }) {
   const firstName = userProfile.mockUserData.name.split(' ')[0];
 
   const [chatHistory, setChatHistory] = useState([
-    { role: "model", text: `Hello ${firstName}! I noticed you updated your resume. Would you like me to scan it for keyword optimization against recent job postings?` }
+    { role: "model", text: `Hello ${firstName}! I'm your AI Copilot. I can see your profile and help with your resume, job descriptions, tasks, and opportunities. What do you need?` }
   ]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
+  const chatEndRef = useRef(null);
 
-  const handleSendMessage = async () => {
-    if (!inputText.trim()) return;
+  // Auto-scroll chat to bottom
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatHistory, isLoading]);
 
-    const newMessage = { role: "user", text: inputText };
+  // Build screen context from the current page + user data
+  const buildScreenContext = () => {
+    const pageMap = {
+      '/student/dashboard': 'Profile & Dashboard page',
+      '/student/opportunities': 'Opportunities page',
+      '/student/tasks': 'Tasks Overview page',
+    };
+    const currentPage = pageMap[path] || (path.includes('/tasks/') ? 'Task Detail page' : path);
+
+    return `[Screen Context]
+Current Page: ${currentPage}
+User: ${userProfile.mockUserData.name}
+Title: ${userProfile.mockUserData.title}
+Skills: ${userProfile.mockUserData.skills.join(', ')}
+Trust Score: ${userProfile.mockUserData.trustScore}/100 (${userProfile.mockUserData.percentile})
+---
+User Message: `;
+  };
+
+  const handleSendMessage = async (textToSend) => {
+    const msg = textToSend || inputText;
+    if (!msg.trim()) return;
+
+    const newMessage = { role: "user", text: msg };
     setChatHistory(prev => [...prev, newMessage]);
     setInputText("");
     setIsLoading(true);
+
+    // Prepend screen context to every message
+    const contextualMessage = buildScreenContext() + msg;
 
     try {
       const response = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          history: chatHistory.map(msg => ({ 
-            role: msg.role === 'model' ? 'model' : 'user', 
-            parts: [{ text: msg.text }] 
-          })),
-          message: inputText
-        })
+        body: JSON.stringify({ message: contextualMessage })
       });
 
       const data = await response.json();
       if (data.success) {
         setChatHistory(prev => [...prev, { role: "model", text: data.data.reply }]);
       } else {
-        console.error("Chat Error:", data.message);
+        setChatHistory(prev => [...prev, { role: "model", text: "Sorry, I couldn't process that request." }]);
       }
     } catch (error) {
       console.error("Failed to fetch chat response:", error);
+      setChatHistory(prev => [...prev, { role: "model", text: "Connection error. Please try again." }]);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
-    }
+    if (e.key === 'Enter') handleSendMessage();
   };
+
+  // Web Speech API voice command
+  const handleVoiceCommand = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice input is not supported in your browser. Try Chrome.");
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+    setIsListening(true);
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setIsListening(false);
+      handleSendMessage(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+  };
+
 
   const getSidebarClass = (targetPath) => {
     const isActive = path === targetPath || (targetPath !== '/student/dashboard' && path.startsWith(targetPath));
@@ -104,7 +168,7 @@ export default function StudentDashboardLayout({ children }) {
           </div>
           <div>
             <h2 className="font-headline text-lg font-bold text-on-surface">AI Copilot</h2>
-            <p className="font-body text-xs text-on-surface-variant">Ready to assist</p>
+            <p className="font-body text-xs text-on-surface-variant">{isListening ? '🎤 Listening...' : isLoading ? 'Thinking...' : 'Ready to assist'}</p>
           </div>
         </div>
         <div className="flex-1 overflow-y-auto space-y-4 pr-2">
@@ -131,11 +195,18 @@ export default function StudentDashboardLayout({ children }) {
               </div>
             </div>
           )}
+          <div ref={chatEndRef} />
         </div>
         <div className="mt-auto space-y-3 pt-4 border-t border-surface-container-high">
-          <button className="w-full flex items-center justify-center space-x-2 bg-surface-container p-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant animate-pulse-subtle">
-            <span className="material-symbols-outlined text-lg text-[#0050cb]">mic</span>
-            <span className="font-body text-sm font-medium">Voice Command</span>
+          <button 
+            onClick={handleVoiceCommand}
+            className={`w-full flex items-center justify-center space-x-2 p-3 rounded-xl transition-colors font-body text-sm font-medium ${
+              isListening 
+                ? 'bg-red-100 text-red-600 animate-pulse' 
+                : 'bg-surface-container hover:bg-surface-container-high text-on-surface-variant'
+            }`}>
+            <span className="material-symbols-outlined text-lg" style={{ color: isListening ? '#dc2626' : '#0050cb' }}>mic</span>
+            <span>{isListening ? 'Listening... (tap to stop)' : 'Voice Command'}</span>
           </button>
           <div className="relative">
             <input 
