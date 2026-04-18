@@ -3,8 +3,15 @@ import { generateTaskPrompt, cleanJSON } from "../../config/ai.config.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { env } from "../../config/env.js";
 
-const genAI = new GoogleGenerativeAI(env.ai.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+// Lazy-init: create model on first use so a missing API key doesn't crash startup
+let _model = null;
+const getModel = () => {
+    if (!_model) {
+        const genAI = new GoogleGenerativeAI(env.ai.apiKey);
+        _model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    }
+    return _model;
+};
 
 /**
  * 🧠 Generate AI Task using Gemini
@@ -13,7 +20,7 @@ const getAITask = async (skill) => {
     const prompt = generateTaskPrompt(skill);
 
     try {
-        const result = await model.generateContent(prompt);
+        const result = await getModel().generateContent(prompt);
         const response = await result.response;
         const text = response.text();
         

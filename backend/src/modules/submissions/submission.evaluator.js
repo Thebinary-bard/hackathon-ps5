@@ -5,11 +5,15 @@ import {
     cleanJSON,
 } from "../../config/ai.config.js";
 
-/**
- * 🧠 Initialize Gemini
- */
-const genAI = new GoogleGenerativeAI(env.ai.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+let _model = null;
+const getModel = () => {
+    if (!_model) {
+        const genAI = new GoogleGenerativeAI(env.ai.apiKey);
+        _model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    }
+    return _model;
+};
+
 
 /**
  * 🧠 Evaluate submission using Gemini
@@ -18,7 +22,7 @@ export const evaluateWithAI = async (task, submissionContent) => {
     try {
         const prompt = evaluateSubmissionPrompt(task, submissionContent);
 
-        const result = await model.generateContent(prompt);
+        const result = await getModel().generateContent(prompt);
         const response = await result.response;
         const text = response.text();
 

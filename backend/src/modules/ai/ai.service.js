@@ -2,8 +2,15 @@ import { User } from "../users/user.model.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { env } from "../../config/env.js";
 
-const genAI = new GoogleGenerativeAI(env.ai.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+let _model = null;
+const getModel = () => {
+    if (!_model) {
+        const genAI = new GoogleGenerativeAI(env.ai.apiKey);
+        _model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    }
+    return _model;
+};
+
 
 export const handleAIRequest = async (userId, input) => {
     // 1️⃣ Fetch user data
@@ -26,7 +33,7 @@ Return structured JSON:
 
     try {
         // 3️⃣ Call AI
-        const result = await model.generateContent(prompt);
+        const result = await getModel().generateContent(prompt);
         const text = await result.response.text();
         return JSON.parse(text);
     } catch (apiError) {

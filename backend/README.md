@@ -48,6 +48,7 @@ Before proceeding, please review the **[`requirements.txt`](./requirements.txt)*
    ```env
    PORT=5000
    NODE_ENV=development
+   FRONTEND_URL=http://localhost:5173
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_super_secret_jwt_key
    JWT_EXPIRES_IN=7d

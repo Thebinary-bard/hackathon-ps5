@@ -17,7 +17,8 @@ const reviewSchema = new mongoose.Schema(
         gig: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Gig",
-            required: true,
+            required: false,  // optional — review can exist without a specific gig
+            default: null,
         },
 
         rating: {

@@ -3,15 +3,24 @@ import { User } from "../users/user.model.js";
 
 /**
  * ⭐ Create review
+ * Accepts both { toUser, rating, comment, gig? }  (Postman-style)
+ * and           { reviewee, rating, comment, gig? } (internal style)
  */
 export const createReview = async (data, reviewerId) => {
+    // Normalize: toUser alias → reviewee
+    const revieweeId = data.toUser || data.reviewee;
+    if (!revieweeId) throw new Error("toUser (reviewee) is required");
+
     const review = await Review.create({
-        ...data,
+        rating: data.rating,
+        comment: data.comment || "",
+        gig: data.gig || null,
+        reviewee: revieweeId,
         reviewer: reviewerId,
     });
 
     // 🔥 Update user's reliability based on rating
-    await updateUserRating(review.reviewee, review.rating);
+    await updateUserRating(revieweeId, review.rating);
 
     return review;
 };

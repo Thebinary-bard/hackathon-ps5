@@ -8,9 +8,16 @@ export const getUserProfile = async (userId) => {
 };
 
 export const updateUserProfile = async (userId, data) => {
-    const user = await User.findByIdAndUpdate(userId, data, {
-        new: true,
-    });
+    // If skills sent as plain strings array (e.g. ["React","Node"]), normalize to skill objects
+    if (Array.isArray(data.skills) && data.skills.length > 0 && typeof data.skills[0] === "string") {
+        data.skills = data.skills.map((s) => ({ name: s }));
+    }
+
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { $set: data },
+        { new: true, runValidators: true }
+    );
 
     return user;
 };
