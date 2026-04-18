@@ -23,8 +23,18 @@ export default function StudentDashboardPage() {
         });
         const data = await response.json();
         if (data.success) {
-          setUserData(data.data);
-          setPortfolio(data.data.portfolio || []);
+          // Merge API data with JSON fallbacks — never blank the UI
+          setUserData(prev => ({
+            ...prev,
+            ...data.data,
+            overallScore: data.data.overallScore ?? data.data.trustScore ?? prev.trustScore ?? 0,
+            skills: (data.data.skills?.length > 0 ? data.data.skills : prev.skills),
+            tags: (data.data.tags?.length > 0 ? data.data.tags : prev.tags),
+          }));
+          // Only replace portfolio if API actually returned items
+          if (data.data.portfolio?.length > 0) {
+            setPortfolio(data.data.portfolio);
+          }
           setTempLinks({
             githubUsername: data.data.githubUsername || '',
             githubLink: data.data.githubLink || '',
@@ -33,6 +43,7 @@ export default function StudentDashboardPage() {
         }
       } catch (error) {
         console.error('Failed to fetch profile:', error);
+        // keep JSON fallback already in state
       } finally {
         setLoading(false);
       }
@@ -172,14 +183,14 @@ export default function StudentDashboardPage() {
             <div className="relative w-32 h-32 mx-auto">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                 <path className="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray="100, 100" strokeWidth="3.8"></path>
-                <path className="text-primary" d={`M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831`} fill="none" stroke="currentColor" strokeDasharray={`${userData.overallScore || 0}, 100`} strokeLinecap="round" strokeWidth="3.8"></path>
+                <path className="text-primary" d={`M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831`} fill="none" stroke="currentColor" strokeDasharray={`${userData.overallScore ?? userData.trustScore ?? 0}, 100`} strokeLinecap="round" strokeWidth="3.8"></path>
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-headline text-3xl font-extrabold text-on-surface group-hover:scale-110 transition-transform">{userData.overallScore || 0}</span>
+                <span className="font-headline text-3xl font-extrabold text-on-surface group-hover:scale-110 transition-transform">{userData.overallScore ?? userData.trustScore ?? 0}</span>
                 <span className="font-body text-xs text-on-surface-variant">/100</span>
               </div>
             </div>
-            <p className="font-body text-sm text-center text-on-surface-variant mt-4">Top {100 - (userData.overallScore || 0)}% of candidates</p>
+            <p className="font-body text-sm text-center text-on-surface-variant mt-4">Top {100 - (userData.overallScore ?? userData.trustScore ?? 0)}% of candidates</p>
           </div>
 
           <div className="col-span-1 md:col-span-2 bg-surface-container-low p-6 rounded-2xl shadow-sm hover:bg-surface-container-lowest transition-colors duration-300">
@@ -295,11 +306,37 @@ export default function StudentDashboardPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {portfolio.map((project, idx) => (
-                <a key={idx} href={project.link || '#'} target="_blank" rel="noopener noreferrer" className="group relative rounded-xl overflow-hidden aspect-video cursor-pointer block bg-surface-container-lowest border border-outline-variant/10">
-                  <div className="w-full h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent">
-                      <p className="font-headline text-white font-semibold text-lg">{project.title}</p>
-                      <p className="font-body text-white/80 text-sm line-clamp-2">{project.description}</p>
-                  </div>
+                <a
+                  key={idx}
+                  href={project.link || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative rounded-xl overflow-hidden aspect-video cursor-pointer block border border-outline-variant/10"
+                  style={project.image ? {
+                    backgroundImage: `url(${project.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  } : {
+                    background: 'linear-gradient(135deg, var(--surface-container-low), var(--surface-container-highest))'
+                  }}
+                >
+                  {project.isUpload && !project.image ? (
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-on-surface-variant group-hover:text-primary transition-colors">
+                      <span className="material-symbols-outlined text-4xl">add_photo_alternate</span>
+                      <p className="font-body text-sm font-semibold">Upload Project</p>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <p className="font-headline text-white font-semibold text-lg drop-shadow">{project.title}</p>
+                      {project.description && <p className="font-body text-white/80 text-sm line-clamp-2 drop-shadow">{project.description}</p>}
+                    </div>
+                  )}
+                  {/* Always show title bar at bottom */}
+                  {!project.isUpload && (
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent group-hover:opacity-0 transition-opacity duration-300">
+                      <p className="font-headline text-white font-semibold text-sm drop-shadow truncate">{project.title}</p>
+                    </div>
+                  )}
                 </a>
               ))}
             </div>

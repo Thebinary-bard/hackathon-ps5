@@ -1,4 +1,5 @@
 import matchedStudents from '../../data/company/matchedStudents.json';
+import potentialMatchStudents from '../../data/company/potentialMatchStudents.json';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CompanyDashboardLayout from './CompanyDashboardLayout';
@@ -152,24 +153,31 @@ export default function CompanyTasksDashboard() {
 </div>
 {/* Talent List */}
 <div className="flex-1 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
-{matchedStudents.map((student, index) => (
-<label key={index} className="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
-<input className="w-4 h-4 text-primary bg-surface border-outline-variant/50 rounded focus:ring-primary focus:ring-offset-0" type="checkbox"/>
-<div className="flex-1 flex items-center gap-3">
-{student.avatar ? (
-    <img alt={`${student.name} portrait`} className="w-10 h-10 rounded-full object-cover" src={student.avatar}/>
-) : (
-    <div className="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-headline font-bold text-sm">
-        {student.name.split(' ').map(n=>n[0]).join('').substring(0,2)}
-    </div>
-)}
-<div>
-<p className="font-body text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">{student.name}</p>
-<p className="font-body text-xs text-on-surface-variant">{student.major} • {student.matchScore}% Match</p>
-</div>
-</div>
-</label>
-))}
+{matchedStudents.map((student, index) => {
+  const photoUrl = potentialMatchStudents[index]?.imageUrl || student.avatar || student.imageUrl;
+  return (
+    <label key={index} className="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-all duration-200 group hover:-translate-y-0.5">
+      <input className="w-4 h-4 text-primary bg-surface border-outline-variant/50 rounded focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+      <div className="flex-1 flex items-center gap-3">
+        {photoUrl ? (
+          <img
+            alt={`${student.name} portrait`}
+            className="w-10 h-10 rounded-full object-cover ring-2 ring-surface shadow-sm group-hover:ring-primary/40 transition-all duration-200"
+            src={photoUrl}
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary flex items-center justify-center font-headline font-bold text-sm ring-2 ring-surface shadow-sm group-hover:ring-primary/40 transition-all duration-200">
+            {student.name.split(' ').map(n=>n[0]).join('').substring(0,2)}
+          </div>
+        )}
+        <div>
+          <p className="font-body text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">{student.name}</p>
+          <p className="font-body text-xs text-on-surface-variant">{student.major} • {student.matchScore}% Match</p>
+        </div>
+      </div>
+    </label>
+  );
+})}
 </div>
 </div>
 {/* Action Button */}

@@ -1,0 +1,12 @@
+{
+  "weightagePercentages": {
+    "skills": 60,
+    "aiAptitudeTest": 30,
+    "cgpa": 10
+  },
+  "maxValues": {
+    "skillsEvaluated": 20,
+    "aiAptitudeTest": 100,
+    "cgpa": 10
+  }
+}

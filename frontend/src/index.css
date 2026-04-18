@@ -1,15 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jomolhari&family=Konkhmer+Sleokchher&family=Rozha+One&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Jomolhari', serif;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+strong, b, .font-bold, .font-extrabold, .font-black {
+  font-family: 'Konkhmer Sleokchher', system-ui;
+}
+
+.font-rozha, .font-rozha-important {
+  font-family: 'Rozha One', serif !important;
+}
+
+.font-konkhmer {
+  font-family: 'Konkhmer Sleokchher', system-ui !important;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); filter: brightness(1.2); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes slideDownFade {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slideDownFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bounceFade {
+  0% { opacity: 0; transform: translateY(60px) scale(0.9); }
+  50% { opacity: 0.8; transform: translateY(-10px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-bounce-fade {
+  animation: bounceFade 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Highly Realistic Optical Fluid Ripple Animations */
+@keyframes ripple-trail {
+  0% {
+      width: 150px;
+      height: 150px;
+      transform: translate(-50%, -50%) scale(0.1);
+      border-radius: 50%;
+      opacity: 0.7;
+      backdrop-filter: blur(8px) brightness(1.15);
+      -webkit-backdrop-filter: blur(8px) brightness(1.15);
+      box-shadow: inset 0 0 15px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3);
+      -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 40%, transparent 60%);
+      mask-image: radial-gradient(circle at center, transparent 20%, black 40%, transparent 60%);
+  }
+  100% {
+      width: 150px;
+      height: 150px;
+      transform: translate(-50%, -50%) scale(1.2);
+      border-radius: 50%;
+      opacity: 0;
+      backdrop-filter: blur(0px) brightness(1);
+      -webkit-backdrop-filter: blur(0px) brightness(1);
+      box-shadow: inset 0 0 0px rgba(255,255,255,0);
+  }
+}
+
+@keyframes ripple-splash {
+  0% {
+      width: 350px;
+      height: 350px;
+      transform: translate(-50%, -50%) scale(0.05);
+      opacity: 1;
+      border-radius: 50%;
+      backdrop-filter: blur(16px) brightness(1.2);
+      -webkit-backdrop-filter: blur(16px) brightness(1.2);
+      box-shadow: 
+          inset 0 0 30px rgba(255, 255, 255, 0.7),
+          0 0 30px rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255,255,255,0.4);
+      -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 35%, transparent 50%);
+      mask-image: radial-gradient(circle at center, transparent 20%, black 35%, transparent 50%);
+  }
+  100% {
+      width: 350px;
+      height: 350px;
+      transform: translate(-50%, -50%) scale(2.5);
+      opacity: 0;
+      border-radius: 50%;
+      backdrop-filter: blur(0px) brightness(1);
+      -webkit-backdrop-filter: blur(0px) brightness(1);
+      box-shadow: inset 0 0 0px rgba(255, 255, 255, 0), 0 0 0px rgba(255, 255, 255, 0);
+      border: 1px solid rgba(255,255,255,0);
+  }
+}
+
+.animate-ripple-trail {
+  animation: ripple-trail 2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+.animate-ripple-splash {
+  animation: ripple-splash 3s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
 }
 
 .liquid-glass {

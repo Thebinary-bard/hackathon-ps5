@@ -53,7 +53,7 @@ export default function CompanyHiringDashboard() {
 {/* Column 1: Candidate Overview (Spans 1 col) */}
 <div className="xl:col-span-1 space-y-8">
 {/* Profile Card */}
-<div className="bg-surface-container-lowest rounded-xl p-8 relative overflow-hidden group hover:scale-[1.01] transition-transform duration-300">
+<div className="bg-surface-container-lowest rounded-xl p-8 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(0,80,203,0.12)] transition-all duration-400">
 <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-container rounded-bl-full -mr-16 -mt-16 opacity-50"></div>
 <div className="flex flex-col items-center text-center relative z-10">
 <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-surface shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)]">
@@ -92,7 +92,7 @@ export default function CompanyHiringDashboard() {
 {/* Column 2 & 3: Details and Decision (Spans 2 cols) */}
 <div className="xl:col-span-2 space-y-8 flex flex-col">
 {/* Evaluation Metrics */}
-<div className="bg-surface-container-lowest rounded-xl p-8 flex-1 group hover:scale-[1.01] transition-transform duration-300">
+<div className="bg-surface-container-lowest rounded-xl p-8 flex-1 group hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(0,80,203,0.1)] transition-all duration-400">
 <h3 className="font-headline text-xl font-bold text-on-surface mb-6">Performance Breakdown</h3>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
 {/* Metric 1 */}
@@ -155,11 +155,7 @@ export default function CompanyHiringDashboard() {
 <p className="font-body text-sm text-on-surface-variant mb-8">Select an outcome for this candidate. This action will trigger automated communications based on your selection.</p>
 <div className="flex flex-col sm:flex-row gap-4">
 {/* Reject Button */}
-<button 
-    onClick={() => handleDecision('rejected')}
-    disabled={loading}
-    className="flex-1 bg-surface-container-highest text-on-surface hover:bg-surface-container-high transition-colors rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 group"
->
+<button className="flex-1 bg-surface-container-highest text-on-surface hover:bg-error hover:text-on-error transition-all duration-200 rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 group hover:-translate-y-0.5 hover:shadow-md">
 <div className="flex items-center gap-2 mb-1">
 <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
 <span className="font-headline font-bold text-lg">Reject</span>
@@ -167,11 +163,7 @@ export default function CompanyHiringDashboard() {
 <span className="font-label text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Student gets: [Rejection Email &amp; Feedback]</span>
 </button>
 {/* Approve Button */}
-<button 
-    onClick={() => handleDecision('completed')}
-    disabled={loading}
-    className="flex-1 bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-on-primary hover:brightness-110 transition-all rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 shadow-lg group"
->
+<button className="flex-1 bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-on-primary hover:brightness-110 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-6px_rgba(0,80,203,0.4)] transition-all duration-200 rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 shadow-lg group">
 <div className="flex items-center gap-2 mb-1">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
 <span className="font-headline font-bold text-lg">Approve</span>

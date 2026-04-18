@@ -46,73 +46,96 @@ export default function CompanyDashboardPage() {
     return (
         <CompanyDashboardLayout>
             
-{/* Hero / Header Section */}
-<header className="flex items-end justify-between w-full">
-<div className="space-y-4">
-<div className="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-label text-xs font-semibold tracking-wide uppercase">
-    {profile.companyType}
-</div>
-<h1 className="font-headline text-[3.5rem] leading-[1.1] tracking-[-0.02em] font-extrabold text-on-surface">
-    {profile.companyName}
-</h1>
-<p className="font-body text-on-surface-variant text-lg max-w-2xl mt-4 leading-relaxed">
-    {profile.description}
-</p>
-</div>
+{/* Hero Banner */}
+<header className="w-full rounded-[2rem] overflow-hidden relative min-h-[220px] flex items-end animate-slide-down" style={{animationDelay: '0.1s', animationFillMode: 'both'}}>
+  {/* Deep gradient background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#0d1f3c] via-[#2a4a8a] to-[#3a5fa0]"></div>
+  {/* Mesh pattern overlay */}
+  <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)', backgroundSize: '40px 40px'}}></div>
+  {/* Glowing orbs */}
+  <div className="absolute top-[-40px] right-[-40px] w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+  <div className="absolute bottom-[-60px] left-[30%] w-64 h-64 bg-[#00B8D9]/20 rounded-full blur-3xl"></div>
+  {/* Content */}
+  <div className="relative z-10 p-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div className="space-y-3">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white font-label text-xs font-semibold tracking-widest uppercase">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse"></span>
+        {profile.companyType}
+      </div>
+      <h1 className="font-headline text-5xl md:text-6xl font-black text-white tracking-[-0.03em] leading-none drop-shadow-lg">
+        {profile.companyName}
+      </h1>
+      <p className="font-body text-white/70 text-base max-w-xl leading-relaxed">
+        {profile.description}
+      </p>
+    </div>
+    <div className="flex gap-3 shrink-0">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 text-center">
+        <p className="font-headline text-3xl font-black text-white">{profile.metrics.activeRoles}</p>
+        <p className="font-label text-xs text-white/60 mt-1 uppercase tracking-wider">Open Roles</p>
+      </div>
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 text-center">
+        <p className="font-headline text-3xl font-black text-white">{profile.metrics.successfulMatches}</p>
+        <p className="font-label text-xs text-white/60 mt-1 uppercase tracking-wider">Matches</p>
+      </div>
+    </div>
+  </div>
 </header>
-{/* Bento Grid Section */}
-<section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-{/* Quick Stats (Glassmorphism inspired) */}
-<div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-8">
-<div className="relative overflow-hidden bg-surface-container-low rounded-[2rem] p-8 hover:bg-surface-container-lowest hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl">
-    <img src="https://images.unsplash.com/photo-1557683311-eac922347aa1?auto=format&fit=crop&q=80&w=600" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-500 pointer-events-none mix-blend-overlay" alt="" />
-    <div className="relative z-10 flex justify-between items-start mb-12">
-        <span className="material-symbols-outlined text-primary text-3xl transition-colors bg-white/50 p-2 rounded-full backdrop-blur-md">group</span>
-        <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 text-[#001849] font-label text-xs font-bold backdrop-blur-sm shadow-sm">{profile.metrics.activeRolesGrowth}</span>
+{/* Stats Row */}
+<section className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6">
+  {/* Active Roles Card */}
+  <div className="relative overflow-hidden bg-surface-container-low rounded-2xl p-5 hover:bg-surface-container-lowest hover:-translate-y-1 transition-all duration-300 flex items-center gap-5 group shadow-sm hover:shadow-lg animate-bounce-fade" style={{animationDelay: '0.2s', animationFillMode: 'both'}}>
+    <img src="https://images.unsplash.com/photo-1557683311-eac922347aa1?auto=format&fit=crop&q=80&w=600" className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-105 transition-transform duration-500 pointer-events-none mix-blend-overlay" alt="" />
+    <div className="relative z-10 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+      <span className="material-symbols-outlined text-primary text-2xl">work</span>
     </div>
     <div className="relative z-10">
-        <p className="font-label text-on-surface-variant font-semibold mb-2">Active Roles</p>
-        <p className="font-headline text-5xl font-extrabold text-[#001849]">{profile.metrics.activeRoles}</p>
+      <p className="font-label text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">Active Roles</p>
+      <p className="font-headline text-3xl font-extrabold text-on-surface leading-none">{profile.metrics.activeRoles}</p>
+      <span className="inline-flex items-center mt-1.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label text-[10px] font-bold">{profile.metrics.activeRolesGrowth}</span>
     </div>
-</div>
-<div className="relative overflow-hidden bg-surface-container-low rounded-[2rem] p-8 hover:bg-surface-container-lowest hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl">
-    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&q=80&w=600" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-500 pointer-events-none mix-blend-overlay" alt="" />
-    <div className="relative z-10 flex justify-between items-start mb-12">
-        <span className="material-symbols-outlined text-primary text-3xl transition-colors bg-white/50 p-2 rounded-full backdrop-blur-md">handshake</span>
-        <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/80 text-[#001849] font-label text-xs font-bold backdrop-blur-sm shadow-sm">High Match Rate</span>
+  </div>
+  {/* Successful Matches Card */}
+  <div className="relative overflow-hidden bg-surface-container-low rounded-2xl p-5 hover:bg-surface-container-lowest hover:-translate-y-1 transition-all duration-300 flex items-center gap-5 group shadow-sm hover:shadow-lg animate-bounce-fade" style={{animationDelay: '0.3s', animationFillMode: 'both'}}>
+    <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&q=80&w=600" className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-105 transition-transform duration-500 pointer-events-none mix-blend-overlay" alt="" />
+    <div className="relative z-10 w-12 h-12 rounded-xl bg-secondary-container/60 flex items-center justify-center shrink-0">
+      <span className="material-symbols-outlined text-on-secondary-container text-2xl">handshake</span>
     </div>
     <div className="relative z-10">
-        <p className="font-label text-on-surface-variant font-semibold mb-2">Successful Matches</p>
-        <p className="font-headline text-5xl font-extrabold text-[#001849]">{profile.metrics.successfulMatches}</p>
+      <p className="font-label text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">Successful Matches</p>
+      <p className="font-headline text-3xl font-extrabold text-on-surface leading-none">{profile.metrics.successfulMatches}</p>
+      <span className="inline-flex items-center mt-1.5 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label text-[10px] font-bold">High Match Rate</span>
     </div>
-</div>
-</div>
-{/* Payment Info Management */}
-<div className="col-span-1 bg-surface-container-low rounded-[2rem] p-8 hover:bg-surface-container-lowest hover:scale-[1.01] transition-all duration-300 flex flex-col">
-<div className="flex items-center gap-3 mb-8">
-<div className="w-10 h-10 rounded-full bg-surface flex items-center justify-center">
-<span className="material-symbols-outlined text-on-surface-variant" style={{ fontVariationSettings: "'FILL' 1" }}>credit_card</span>
-</div>
-<h2 className="font-headline text-xl font-bold text-on-surface">Payment Info</h2>
-</div>
-<div className="space-y-6 flex-1">
-<div className="p-5 rounded-xl bg-surface border border-outline-variant/15 flex items-center justify-between">
-<div className="flex items-center gap-4">
-<div className="w-12 h-8 bg-surface-variant rounded flex items-center justify-center font-bold text-xs text-on-surface-variant">{profile.billing.cardType}</div>
-<div>
-<p className="font-label text-sm font-semibold text-on-surface">•••• {profile.billing.lastFour}</p>
-<p className="font-label text-xs text-on-surface-variant">Expires {profile.billing.expiry}</p>
-</div>
-</div>
-<span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-</div>
-<p className="font-body text-sm text-on-surface-variant px-1">Next billing cycle is scheduled for {profile.billing.nextCycle}. You are on the {profile.billing.planName}.</p>
-</div>
-<button className="w-full mt-8 bg-gradient-to-br from-primary to-primary-container text-on-primary py-4 rounded-full font-label font-bold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2">
-                        Manage Billing
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
+  </div>
+</section>
+
+{/* Role Compensation Card */}
+<section className="mt-6 bg-surface-container-low rounded-2xl p-6 animate-bounce-fade" style={{animationDelay: '0.4s', animationFillMode: 'both'}}>
+  <div className="flex items-center justify-between mb-5">
+    <div className="flex items-center gap-2">
+      <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>payments</span>
+      <h2 className="font-headline text-lg font-bold text-on-surface">Role Compensation</h2>
+    </div>
+    <span className="text-xs font-label font-semibold text-on-surface-variant bg-surface px-3 py-1 rounded-full">Annual (CTC)</span>
+  </div>
+  <div className="space-y-2">
+    {profile.roleCompensation.map((item, i) => (
+      <div key={i} className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-surface-container-lowest hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 group">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors duration-200">
+            <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-lg transition-colors duration-200">{item.icon}</span>
+          </div>
+          <span className="font-body text-sm font-semibold text-on-surface">{item.role}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className={`text-[10px] font-label font-bold px-2 py-0.5 rounded-full ${item.type === 'Full-time' ? 'bg-primary/10 text-primary' : item.type === 'Contract' ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-variant text-on-surface-variant'}`}>
+            {item.type}
+          </span>
+          <span className="font-headline text-sm font-bold text-on-surface">{item.range}</span>
+        </div>
+      </div>
+    ))}
+  </div>
 </section>
 
         </CompanyDashboardLayout>

@@ -13,5 +13,12 @@
     "expiry": "12/25",
     "planName": "Pro Startup Plan",
     "nextCycle": "Oct 1st"
-  }
+  },
+  "roleCompensation": [
+    { "role": "Frontend Engineer", "icon": "code", "range": "₹8L – ₹14L", "type": "Full-time" },
+    { "role": "Backend Engineer", "icon": "dns", "range": "₹10L – ₹18L", "type": "Full-time" },
+    { "role": "Product Designer", "icon": "design_services", "range": "₹6L – ₹12L", "type": "Full-time" },
+    { "role": "Data Analyst", "icon": "bar_chart", "range": "₹7L – ₹13L", "type": "Contract" },
+    { "role": "Marketing Lead", "icon": "campaign", "range": "₹5L – ₹9L", "type": "Part-time" }
+  ]
 }

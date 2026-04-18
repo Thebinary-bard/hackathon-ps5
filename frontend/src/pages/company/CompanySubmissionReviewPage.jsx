@@ -4,7 +4,7 @@ import CompanyDashboardLayout from './CompanyDashboardLayout';
 import initialSubmissions from '../../data/company/assignedToWorkStudents.json';
 
 export default function CompanySubmissionReviewPage() {
-    const [submissions, setSubmissions] = useState([]);
+    const [submissions, setSubmissions] = useState(initialSubmissions);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -15,11 +15,13 @@ export default function CompanySubmissionReviewPage() {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await response.json();
-                if (data.success) {
+                if (data.success && data.data?.length > 0) {
                     setSubmissions(data.data);
                 }
+                // else: keep the JSON fallback already in state
             } catch (error) {
                 console.error('Failed to fetch submissions:', error);
+                // keep JSON fallback
             } finally {
                 setLoading(false);
             }
@@ -59,8 +61,9 @@ export default function CompanySubmissionReviewPage() {
         </div>
     ) : (
         submissions.map((sub, index) => {
-            const student = sub.userId || { name: 'Anonymous Student' };
-            const task = sub.taskId || { title: 'General Task' };
+            // Handle both JSON fallback shape (flat) and API shape (nested)
+            const student = sub.userId || { name: sub.name, avatar: sub.avatar };
+            const task = sub.taskId || { title: sub.role || sub.major || 'General Task' };
             
             // Generate some mock variables for visual flair
             const statuses = [

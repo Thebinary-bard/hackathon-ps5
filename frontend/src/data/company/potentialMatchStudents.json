@@ -4,39 +4,80 @@
     "name": "Elena Rostova",
     "role": "UX Research & Product Design",
     "matchScore": 98,
-    "skills": [
-      "User Testing",
-      "Figma",
-      "Data Visualization",
-      "+2 more"
-    ],
+    "skills": ["User Testing", "Figma", "Data Visualization", "Prototyping", "Usability Studies"],
     "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCNrxOwejhwk6MeieoTbVIfnKzuLTN6KPoha9S4E8W3CRiRu9NG6EB-mPOfRrjAz7XWe_JeGfr6sCT-Dr6LqJ3x400i-lbDtxTrofRMxIgOXf9y2dNIHYYwHkrf9kME9oNjfdVrcO7TQnuQ92_8jxNcttUO0HiXytSyuOh1QAMpTwUUMcK2Tq08jsb_teWFoQZg9wHXvBnZX_sqgO8fubiKzdAsNa1uARxqcIZOvPAGLRWjiNKZJpFAKOptp6YtofB6ki6F_RBur3-p",
-    "superpower": "fastest delivery"
+    "superpower": "fastest delivery",
+    "trustScore": 94,
+    "location": "Bangalore, India",
+    "availability": "Immediate",
+    "cgpa": 9.1,
+    "college": "IIT Bombay",
+    "year": "Final Year",
+    "bio": "Passionate UX researcher with a strong track record in user-centered design. I thrive at the intersection of empathy and data — turning complex problems into intuitive, delightful products. Previously interned at Swiggy and Myntra.",
+    "tags": ["Remote", "Full-time", "Immediate"],
+    "portfolioProjects": [
+      { "title": "Fintech Onboarding Redesign", "description": "Reduced drop-off by 42% through iterative usability testing.", "link": "#" },
+      { "title": "Accessibility Audit — HealthTech App", "description": "Full WCAG 2.1 audit and remediation for 200+ screens.", "link": "#" }
+    ],
+    "completedTasks": [
+      { "taskTitle": "AI Prompt Engineering Matrix", "company": "TechCorp Inc.", "score": "98%", "date": "Oct 12, 2026" },
+      { "taskTitle": "Frontend Performance Audit", "company": "DesignStudio", "score": "95%", "date": "Sep 28, 2026" }
+    ],
+    "behaviorMetrics": { "execution": 96, "communication": 91, "adaptability": 98, "reliability": 94 },
+    "githubLink": "https://github.com",
+    "githubUsername": "elena.rostova"
   },
   {
     "id": 2,
     "name": "Marcus Chen",
     "role": "Full-Stack Engineering",
     "matchScore": 94,
-    "skills": [
-      "React.js",
-      "Node & Express",
-      "PostgreSQL"
-    ],
+    "skills": ["React.js", "Node & Express", "PostgreSQL", "GraphQL", "Docker"],
     "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDD40z5JOglnoC2dq04omI6eQjfcDTUoLPD8MVKaQIBiV3enyslWXKf00hjWwI3KVvvMFoMB5LoB6LXy2B990YDTgbHxvFWUTTD1ILyLwzEqTHmWfxaTUv7moIZqQ7Op9J85JfrxBD4IPenRW3RGOGuGqFGHp1GsdxWB-_wXmt1lsalxFzCDDZvJJUI_LOVnNba_BT58sY7FTsgXEJ0NvsX86pFBSuQZvjLT5dl8eIgS_EmR9nF-uDrgq9xA7VUceRMU3R_K9WRTpgT",
-    "superpower": "best in under pressure"
+    "superpower": "best in under pressure",
+    "trustScore": 89,
+    "location": "Hyderabad, India",
+    "availability": "2 weeks notice",
+    "cgpa": 8.7,
+    "college": "BITS Pilani",
+    "year": "Graduate",
+    "bio": "Full-stack engineer with 2 years of freelance experience building scalable SaaS products. Obsessed with clean architecture and developer experience. Contributor to open-source React libraries.",
+    "tags": ["Hybrid", "Full-time"],
+    "portfolioProjects": [
+      { "title": "SaaS Analytics Dashboard", "description": "End-to-end build with React, Node, and PostgreSQL. 10K+ daily users.", "link": "#" },
+      { "title": "Real-time Collaboration Tool", "description": "WebSocket-based whiteboard app with conflict resolution.", "link": "#" }
+    ],
+    "completedTasks": [
+      { "taskTitle": "GraphQL Schema Migration", "company": "CloudMetrics", "score": "94%", "date": "Oct 5, 2026" }
+    ],
+    "behaviorMetrics": { "execution": 90, "communication": 84, "adaptability": 88, "reliability": 96 },
+    "githubLink": "https://github.com",
+    "githubUsername": "marcus.chen.dev"
   },
   {
     "id": 3,
     "name": "Sarah Jenkins",
     "role": "Growth Marketing Strategy",
     "matchScore": 82,
-    "skills": [
-      "SEO & Content",
-      "Google Analytics",
-      "+1 more"
-    ],
+    "skills": ["SEO & Content", "Google Analytics", "A/B Testing", "Copywriting"],
     "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuC9BRAQLOm2topwqqk2QZeKSzQtZXtQTh13tRLGh6hnEUj4n3CIRXHFkHKgENGlkBk5aPYNtsbMJEsl9arjJGnDPrPpxHl1fR-MNmsxQnqLGhs_8PUPANcTkQrTUT7azqfp6GvTFsVbMp5UugMivEKpLKJXM1wmnwuL29IEi8LMaHmhG2jsBLAIm5cHSFYQyDhrIxuE95aIj37SiP-1VhONmxiI3ZP-djyCneIL4o5Ro2CTljLdEYKC_ylPZGfGWeYLme_QfDxjUGsa",
-    "superpower": "most consistent"
+    "superpower": "most consistent",
+    "trustScore": 82,
+    "location": "Mumbai, India",
+    "availability": "1 month notice",
+    "cgpa": 8.2,
+    "college": "Symbiosis Institute",
+    "year": "Graduate",
+    "bio": "Growth marketer specializing in 0-to-1 SaaS acquisition channels. I combine data-driven SEO with compelling storytelling to build sustainable growth loops. Previously grew a D2C brand's organic traffic by 300% in 8 months.",
+    "tags": ["Remote", "Part-time"],
+    "portfolioProjects": [
+      { "title": "D2C Brand SEO Overhaul", "description": "300% organic traffic increase in 8 months via content clusters.", "link": "#" }
+    ],
+    "completedTasks": [
+      { "taskTitle": "Design System Tokens Sync", "company": "Innovatrix Labs", "score": "82%", "date": "Sep 15, 2026" }
+    ],
+    "behaviorMetrics": { "execution": 80, "communication": 92, "adaptability": 78, "reliability": 85 },
+    "githubLink": null,
+    "githubUsername": null
   }
 ]

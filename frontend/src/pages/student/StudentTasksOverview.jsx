@@ -38,7 +38,7 @@ export default function StudentTasksOverview() {
           {/* Bento Grid Layout for Active Tasks */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             {activeTasks.map(task => (
-              <article key={task.id} className="bg-surface-container-low rounded-2xl p-8 hover:bg-surface-container-lowest hover:scale-[1.01] transition-all duration-300 group flex flex-col relative overflow-hidden">
+              <article key={task.id} className="bg-surface-container-low rounded-2xl p-8 hover:bg-surface-container-lowest hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(0,80,203,0.18)] transition-all duration-400 group flex flex-col relative overflow-hidden">
                 <div className="absolute -top-12 -right-12 w-40 h-40 bg-primary-fixed/20 rounded-full blur-3xl group-hover:bg-primary-fixed/40 transition-colors z-0"></div>
                 <div className="relative z-10 flex-1">
                   <div className="flex justify-between items-start mb-6">
@@ -85,7 +85,7 @@ export default function StudentTasksOverview() {
           <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight mb-8">Solved Tasks</h2>
           <div className="space-y-4">
             {solvedTasksData.map(task => (
-              <div key={task.id} className="bg-surface-container-low rounded-xl overflow-hidden shadow-sm transition-all duration-300 border border-outline-variant/10">
+              <div key={task.id} className="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 border border-outline-variant/10">
                 <div 
                   className="group hover:bg-surface-container-lowest p-4 md:p-6 cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8"
                   onClick={() => toggleExpand(task.id)}

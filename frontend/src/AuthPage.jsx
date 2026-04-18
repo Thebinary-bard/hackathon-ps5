@@ -62,7 +62,7 @@ export default function AuthPage() {
 
 
 
-<main className="w-full lg:w-[45%] xl:w-[40%] flex flex-col relative z-10 bg-surface shadow-[40px_0_40px_-15px_rgba(0,24,73,0.03)] min-h-screen">
+<main className="w-full lg:w-[45%] xl:w-[40%] flex flex-col relative z-10 bg-surface shadow-[40px_0_40px_-15px_rgba(0,24,73,0.03)] min-h-screen animate-slide-down">
 
 <header className="pt-8 px-8 md:px-16 lg:pt-12">
 <Link to="/" className="inline-flex items-center gap-2 group">
@@ -71,33 +71,33 @@ export default function AuthPage() {
 </Link>
 </header>
 
-<div className="flex-1 flex flex-col justify-center px-8 md:px-16 py-12 max-w-md mx-auto w-full">
-<div className="mb-10 space-y-3">
+<div className="flex-1 flex flex-col justify-center px-8 md:px-16 py-6 max-w-md mx-auto w-full">
+<div className="mb-8 space-y-2">
 <h1 className="font-headline text-4xl font-bold tracking-tight text-on-background" >Welcome back</h1>
 <p className="text-on-surface-variant font-body" >Enter your details to access your portal.</p>
 </div>
-<form className="space-y-6" onSubmit={handleLogin}>
+<form className="space-y-4" onSubmit={handleLogin}>
 {error && <div className="text-red-500 text-sm font-medium p-3 bg-red-50 rounded-lg">{error}</div>}
 <div className="space-y-2">
 <span className="text-sm font-label font-medium text-on-surface-variant block" >I am logging in as a...</span>
 <div className="flex p-1 bg-surface-container-low rounded-full w-full relative isolation-auto">
 
-<button className={`flex-1 py-3 px-4 rounded-full font-label font-semibold text-sm transition-all z-10 ${role === 'student' ? 'bg-surface-container-lowest text-primary shadow-[0_4px_12px_rgba(0,24,73,0.06)]' : 'text-on-surface-variant hover:text-on-surface'}`} type="button" onClick={() => setRole('student')}>
+<button className={`flex-1 py-2 px-4 rounded-full font-label font-semibold text-sm transition-all z-10 ${role === 'student' ? 'bg-surface-container-lowest text-primary shadow-[0_4px_12px_rgba(0,24,73,0.06)]' : 'text-on-surface-variant hover:text-on-surface'}`} type="button" onClick={() => setRole('student')}>
                             Student
                         </button>
 
-<button className={`flex-1 py-3 px-4 rounded-full font-label font-semibold text-sm transition-all z-10 ${role === 'company' ? 'bg-surface-container-lowest text-primary shadow-[0_4px_12px_rgba(0,24,73,0.06)]' : 'text-on-surface-variant hover:text-on-surface'}`} type="button" onClick={() => setRole('company')}>
+<button className={`flex-1 py-2 px-4 rounded-full font-label font-semibold text-sm transition-all z-10 ${role === 'company' ? 'bg-surface-container-lowest text-primary shadow-[0_4px_12px_rgba(0,24,73,0.06)]' : 'text-on-surface-variant hover:text-on-surface'}`} type="button" onClick={() => setRole('company')}>
                             Company
                         </button>
 </div>
 </div>
-<div className="space-y-5 pt-2">
+<div className="space-y-4 pt-1">
 
 <div className="space-y-1.5 group">
 <label className="text-sm font-label font-medium text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="email" >Email ID</label>
 <div className="relative flex items-center">
 <span className="material-symbols-outlined absolute left-4 text-on-surface-variant opacity-70" >mail</span>
-<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="email" placeholder="name@university.edu" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-2.5 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="email" placeholder="name@university.edu" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 </div>
 </div>
 
@@ -108,14 +108,14 @@ export default function AuthPage() {
 </div>
 <div className="relative flex items-center">
 <span className="material-symbols-outlined absolute left-4 text-on-surface-variant opacity-70" >lock</span>
-<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-4 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="password" placeholder="••••••••" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+<input className="w-full bg-surface-container-low border-0 text-on-surface font-body rounded-lg py-2.5 pl-12 pr-4 placeholder:text-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-all duration-200" id="password" placeholder="••••••••" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 </div>
 </div>
 </div>
 
 
 <div className="pt-2">
-<button onClick={handleGoogleLogin} className="w-full bg-white border border-outline-variant text-on-surface font-label font-bold text-base py-4 rounded-xl hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-3 shadow-sm" type="button" >
+<button onClick={handleGoogleLogin} className="w-full bg-white border border-outline-variant text-on-surface font-label font-bold text-base py-2.5 rounded-xl hover:bg-surface-container-low hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-3 shadow-sm" type="button" >
 <svg className="w-5 h-5" viewBox="0 0 24 24">
 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -124,8 +124,8 @@ export default function AuthPage() {
 </svg>
         Login with Google
     </button>
-</div><div className="pt-4">
-<button disabled={loading} className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-base py-4 rounded-xl hover:brightness-110 active:scale-[0.98] shadow-[0_8px_16px_-4px_rgba(0,80,203,0.2)] transition-all duration-200 flex justify-center items-center gap-2 disabled:opacity-50" type="submit" >
+</div><div className="pt-2">
+<button disabled={loading} className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-base py-2.5 rounded-xl hover:brightness-110 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-6px_rgba(0,80,203,0.35)] active:scale-[0.98] shadow-[0_8px_16px_-4px_rgba(0,80,203,0.2)] transition-all duration-200 flex justify-center items-center gap-2 disabled:opacity-50" type="submit" >
                         {loading ? 'Logging in...' : 'Login to Portal'}
                         <span className="material-symbols-outlined text-xl" >arrow_forward</span>
 </button>
@@ -142,7 +142,7 @@ export default function AuthPage() {
 <div className="absolute inset-0 bg-gradient-to-br from-secondary-container to-surface-container-high opacity-50 z-0"></div>
 <img alt="Architectural corporate interior" className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 z-0 scale-105 origin-center" data-alt="bright modern architectural interior space with concrete pillars and soft diffused natural lighting creating a premium professional networking environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcqy0K7akssIWMFGhbeu-cUs6__GGWvB_EFqYnrUYGmNoYJ9mJPpoFoZGhsiNTSKadjSUPJ5JkrYNtiEZyjBgfkgKpUdLhGalncOSbmx81-2NmNO8sIiiOEa0O01YgfW7VQXrS1wBb9Q-cbFG_dyYBBtC6cxZz2NzkhV_O4UGM9oyW83UngwJK05H412RZNTHl230390mhf1KcY2-BKcq5dkkRXs9TE20nGi92gCO-pmjRsmPt6fZIsNWpmVEyQMeZ4MFj2e0iG9W9"  />
 
-<div className="relative z-10 bg-surface/70 backdrop-blur-2xl p-8 rounded-2xl max-w-lg shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)] transform translate-y-12">
+<div className="relative z-10 bg-surface/70 backdrop-blur-2xl p-8 rounded-2xl max-w-lg shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)] transform translate-y-12 animate-bounce-fade" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
 <span className="material-symbols-outlined text-primary text-4xl mb-4 block" data-weight="fill" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
 <p className="font-headline text-2xl text-on-background leading-snug tracking-tight font-medium mb-6" >"Don’t compare yourself with anyone in this world. If you do so, you are insulting yourself."</p>
 <div className="flex items-center gap-4">
