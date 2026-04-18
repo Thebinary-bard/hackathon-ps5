@@ -10,8 +10,8 @@ export const generateToken = (user) => {
             id: user._id,
             role: user.role,
         },
-        JWT_SECRET,
-        { expiresIn: JWT_EXPIRES_IN }
+        process.env.JWT_SECRET,
+        { expiresIn: "7d" }
     );
 };
 
@@ -44,6 +44,10 @@ export const loginUser = async ({ email, password }) => {
 
     if (!user) {
         throw new Error("Invalid credentials");
+    }
+
+    if (user.provider === "google") {
+        throw new Error("Use Google login");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);

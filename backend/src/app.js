@@ -11,6 +11,8 @@ import gigRoutes from "./modules/gigs/gig.routes.js";
 import matchingRoutes from "./modules/matching/matching.routes.js";
 import reviewRoutes from "./modules/reviews/review.routes.js";
 
+import chatRoutes from "./modules/chat/chat.routes.js";
+
 const app = express();
 
 /**
@@ -44,6 +46,7 @@ app.use("/api/submissions", submissionRoutes);
 app.use("/api/gigs", gigRoutes);
 app.use("/api/matching", matchingRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/chat", chatRoutes);
 
 /**
  * ❌ 404 handler

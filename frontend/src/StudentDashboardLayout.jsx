@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import userProfile from './data/userProfile.json';
 
@@ -7,6 +7,52 @@ export default function StudentDashboardLayout({ children }) {
   const location = useLocation();
   const path = location.pathname;
   const firstName = userProfile.mockUserData.name.split(' ')[0];
+
+  const [chatHistory, setChatHistory] = useState([
+    { role: "model", text: `Hello ${firstName}! I noticed you updated your resume. Would you like me to scan it for keyword optimization against recent job postings?` }
+  ]);
+  const [inputText, setInputText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSendMessage = async () => {
+    if (!inputText.trim()) return;
+
+    const newMessage = { role: "user", text: inputText };
+    setChatHistory(prev => [...prev, newMessage]);
+    setInputText("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          history: chatHistory.map(msg => ({ 
+            role: msg.role === 'model' ? 'model' : 'user', 
+            parts: [{ text: msg.text }] 
+          })),
+          message: inputText
+        })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setChatHistory(prev => [...prev, { role: "model", text: data.data.reply }]);
+      } else {
+        console.error("Chat Error:", data.message);
+      }
+    } catch (error) {
+      console.error("Failed to fetch chat response:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
 
   const getSidebarClass = (targetPath) => {
     const isActive = path === targetPath || (targetPath !== '/student/dashboard' && path.startsWith(targetPath));
@@ -62,12 +108,29 @@ export default function StudentDashboardLayout({ children }) {
           </div>
         </div>
         <div className="flex-1 overflow-y-auto space-y-4 pr-2">
-          <div className="bg-surface-container-lowest p-4 rounded-2xl rounded-tl-sm shadow-sm border border-surface-variant/50">
-            <p className="font-body text-sm text-on-surface">Hello {firstName}! I noticed you updated your resume. Would you like me to scan it for keyword optimization against recent job postings?</p>
-          </div>
-          <div className="bg-primary/5 p-4 rounded-2xl rounded-tr-sm self-end ml-8">
-            <p className="font-body text-sm text-on-surface">Yes, please. Focus on frontend roles.</p>
-          </div>
+          {chatHistory.map((msg, index) => (
+            msg.role === 'model' ? (
+              <div key={index} className="bg-surface-container-lowest p-4 rounded-2xl rounded-tl-sm shadow-sm border border-surface-variant/50 relative">
+                <div style={{ position: 'absolute', top: -10, left: -10, width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(to bottom right, #0050cb, #0066ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 12 }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 14 }}>smart_toy</span>
+                </div>
+                <p className="font-body text-sm text-on-surface whitespace-pre-wrap">{msg.text}</p>
+              </div>
+            ) : (
+              <div key={index} className="bg-primary/5 p-4 rounded-2xl rounded-tr-sm self-end ml-8">
+                <p className="font-body text-sm text-on-surface whitespace-pre-wrap">{msg.text}</p>
+              </div>
+            )
+          ))}
+          {isLoading && (
+            <div className="bg-surface-container-lowest p-4 rounded-2xl rounded-tl-sm shadow-sm border border-surface-variant/50 w-24">
+              <div className="flex space-x-1 justify-center items-center h-4">
+                <div className="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                <div className="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="mt-auto space-y-3 pt-4 border-t border-surface-container-high">
           <button className="w-full flex items-center justify-center space-x-2 bg-surface-container p-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant animate-pulse-subtle">
@@ -75,8 +138,19 @@ export default function StudentDashboardLayout({ children }) {
             <span className="font-body text-sm font-medium">Voice Command</span>
           </button>
           <div className="relative">
-            <input className="w-full bg-surface-container-lowest border-none rounded-xl pl-4 pr-10 py-3 font-body text-sm focus:ring-2 focus:ring-primary/20 shadow-sm transition-all text-on-surface placeholder-on-surface-variant/50" placeholder="Ask AI..." type="text"/>
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary-container p-1">
+            <input 
+              className="w-full bg-surface-container-lowest border-none rounded-xl pl-4 pr-10 py-3 font-body text-sm focus:ring-2 focus:ring-primary/20 shadow-sm transition-all text-on-surface placeholder-on-surface-variant/50" 
+              placeholder="Ask AI..." 
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <button 
+              className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 ${inputText.trim() ? 'text-primary hover:text-primary-container' : 'text-on-surface-variant/50'} transition-colors`}
+              onClick={handleSendMessage}
+              disabled={isLoading}
+            >
               <span className="material-symbols-outlined text-lg" style={{ fontVariationSettings:"'FILL' 1" }}>send</span>
             </button>
           </div>

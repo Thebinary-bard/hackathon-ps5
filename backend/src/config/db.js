@@ -5,10 +5,7 @@ export const connectDB = async () => {
     try {
         let uri = env.mongoURI;
         try {
-            const conn = await mongoose.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
+            const conn = await mongoose.connect(uri);
             console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
             return;
         } catch (err) {
@@ -16,10 +13,7 @@ export const connectDB = async () => {
             const { MongoMemoryServer } = await import("mongodb-memory-server");
             const mongoServer = await MongoMemoryServer.create();
             uri = mongoServer.getUri();
-            const conn = await mongoose.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
+            const conn = await mongoose.connect(uri);
             console.log(`✅ MongoDB Memory Server Connected: ${conn.connection.host}`);
         }
     } catch (error) {

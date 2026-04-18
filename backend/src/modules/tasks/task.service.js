@@ -3,8 +3,8 @@ import { generateTaskPrompt, cleanJSON } from "../../config/ai.config.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { env } from "../../config/env.js";
 
-const genAI = new GoogleGenerativeAI(env.ai.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 /**
  * 🧠 Generate AI Task using Gemini

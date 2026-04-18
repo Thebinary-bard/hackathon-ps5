@@ -8,8 +8,8 @@ import {
 /**
  * 🧠 Initialize Gemini
  */
-const genAI = new GoogleGenerativeAI(env.ai.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 /**
  * 🧠 Evaluate submission using Gemini

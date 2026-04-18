@@ -16,7 +16,7 @@ passport.use(
                     user = await User.create({
                         name: profile.displayName,
                         email,
-                        password: "oauth-dummy", // dummy
+                        provider: "google",
                         role: "student",
                     });
                 }

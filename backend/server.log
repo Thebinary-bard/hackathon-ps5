@@ -1,0 +1,10 @@
+file:///home/aarav/Downloads/PS-05/backend/src/modules/chat/chat.controller.js:3
+import { ApiResponse } from "../../utils/response.js";
+         ^^^^^^^^^^^
+SyntaxError: The requested module '../../utils/response.js' does not provide an export named 'ApiResponse'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:326:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:429:5)
+    at async node:internal/modules/esm/loader:639:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.9.0
