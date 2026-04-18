@@ -60,8 +60,8 @@ export default function TaskResultPage() {
           </div>
 
           {/* Behavior Logic Card */}
-          <div className="col-span-1 md:col-span-12 lg:col-span-7 bg-surface-container-low rounded-2xl p-10 shadow-sm border border-outline-variant/10">
-             <h3 className="font-headline text-on-surface-variant text-sm font-bold tracking-widest uppercase mb-8">Behavioral Breakdown</h3>
+          <div className="col-span-1 md:col-span-12 lg:col-span-12 bg-surface-container-low rounded-[2rem] p-12 md:p-16 shadow-lg border-2 border-primary/20 min-h-[450px] flex flex-col justify-center">
+             <h3 className="font-headline text-on-surface-variant text-base font-bold tracking-widest uppercase mb-12">Behavioral Breakdown</h3>
              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
                 {Object.entries(breakdown).map(([key, value]) => (
                   <div key={key} className="flex flex-col items-center">

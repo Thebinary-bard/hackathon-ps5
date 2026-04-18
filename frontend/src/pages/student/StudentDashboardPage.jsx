@@ -109,7 +109,7 @@ export default function StudentDashboardPage() {
     return (
       <StudentDashboardLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+          <p className="text-on-surface-variant font-body text-lg">Loading your dashboard...</p>
         </div>
       </StudentDashboardLayout>
     );
