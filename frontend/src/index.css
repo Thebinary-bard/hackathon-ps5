@@ -11,3 +11,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.liquid-glass {
+  background: rgba(252, 249, 248, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+.gradient-text {
+  background: linear-gradient(135deg, #0050cb, #0066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.blooming-orb {
+  filter: blur(120px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}

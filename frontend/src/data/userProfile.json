@@ -1,0 +1,49 @@
+{
+  "mockUserData": {
+    "name": "Rahul Kumar",
+    "title": "UX/UI Designer & Front-End Developer",
+    "tags": [
+      "Part-time",
+      "Remote",
+      "Immediate"
+    ],
+    "trustScore": 85,
+    "percentile": "Top 15% in Design",
+    "skills": [
+      "Figma",
+      "React",
+      "Tailwind CSS",
+      "Prototyping",
+      "User Research",
+      "Wireframing",
+      "HTML/CSS"
+    ],
+    "resumeLink": "#",
+    "resumeLastUpdated": "2 days ago",
+    "githubUsername": "rahulkumar",
+    "githubLink": "https://github.com/rahulkumar"
+  },
+  "portfolioProjects": [
+    {
+      "id": 1,
+      "title": "Fintech Dashboard",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBmmRXLa7YMQ1U8PO58fswCD_qHU7kA2hXiuwi8ecCEKtbuLCPGKeIb4zp0AvDYpHBoLulc9QXZnRnvWomoJghD_gFnSjECtiT4AwmA-coZiXDppFSlstddni-s_2BqQwsIfAH5ueCyCn-UpgGo5Lv-lUBk3oLA_cApGxMJe1SiaflsKVTkHmYeFMI70d8mrP26KAKM_hF2HQABudUDI6ySlHVyWhaN8UPMOA0piuYY9oLaPhNEFEexwjgl9vTqD2fP8wzh83339NJa",
+      "alt": "Fintech Dashboard Design",
+      "link": "#",
+      "isUpload": false
+    },
+    {
+      "id": 2,
+      "title": "Eco Tracker App",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDU3dln6P4OKE16ihHdZ1qjTKzIOI-sVihMQGuqzvubIezX0sEVW91sqxMgDpL1PATiSfNHQbnTi99wec-MjJfUsWfqMkMrittYafe2AS6b8QQ9EV9a6_rDCimmrBDM-YMirwCIFaLkDd0AsLyG2lpkWGp6g5gm4Vzcyh9U_Mmk5GATxQ1YUNKSrzKTfefoljmV-RZJnMYFqU-ArJ3DnvxYtBJGJagIkwdgHeQ8L_Y5_Ik1A1T8816-mkKEpX9nRQOAUzMFcTJaIQdU",
+      "alt": "Mobile App Concept",
+      "link": "#",
+      "isUpload": false
+    },
+    {
+      "id": 3,
+      "isUpload": true,
+      "link": "#"
+    }
+  ]
+}

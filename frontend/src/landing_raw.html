@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skillnest | The Architectural Curator of Talent</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fcf9f8",
+                    "tertiary": "#006275",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-fixed": "#001f27",
+                    "secondary-fixed": "#d6e3fb",
+                    "on-primary-fixed": "#001849",
+                    "surface-container-high": "#eae7e7",
+                    "primary": "#0050cb",
+                    "secondary": "#525f73",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "rgba(194, 198, 216, 0.15)",
+                    "surface-tint": "#0054d6",
+                    "inverse-primary": "#b3c5ff",
+                    "tertiary-fixed-dim": "#48d7f9",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#004e5d",
+                    "on-surface-variant": "#424656",
+                    "on-tertiary-container": "#eefaff",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "surface": "#fcf9f8",
+                    "primary-container": "#0066ff",
+                    "on-secondary-fixed": "#0f1c2d",
+                    "on-error": "#ffffff",
+                    "outline": "#727687",
+                    "surface-variant": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#3b485a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "surface-dim": "#dcd9d9",
+                    "secondary-container": "#d6e3fb",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-background": "#1b1b1b",
+                    "on-secondary-container": "#586579",
+                    "surface-container-low": "#f6f3f2",
+                    "on-primary-container": "#f8f7ff",
+                    "primary-fixed": "#dae1ff",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#007d94",
+                    "surface-container": "#f0eded",
+                    "inverse-on-surface": "#f3f0ef",
+                    "secondary-fixed-dim": "#bac7de",
+                    "on-surface": "#1b1b1b",
+                    "tertiary-fixed": "#afecff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .liquid-glass {
+            background: rgba(252, 249, 248, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0050cb, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .blooming-orb {
+            filter: blur(120px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Blooming Background Orbs -->
+<div class="fixed inset-0 overflow-hidden -z-10">
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary-container blooming-orb"></div>
+<div class="absolute top-[40%] -right-[10%] w-[40%] h-[60%] rounded-full bg-tertiary-container blooming-orb"></div>
+<div class="absolute -bottom-[20%] left-[20%] w-[60%] h-[40%] rounded-full bg-secondary-container blooming-orb"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-slate-900/60 backdrop-blur-[24px] shadow-[0_20px_40px_-10px_rgba(0,24,73,0.06)]">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto w-full">
+<div class="text-2xl font-black text-blue-700 dark:text-blue-400 tracking-tighter font-headline">Skillnest</div>
+<div class="hidden md:flex items-center space-x-10">
+<a class="text-slate-600 dark:text-slate-400 font-medium font-headline tracking-tight hover:text-blue-800 transition-all duration-300" href="#">Talent</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium font-headline tracking-tight hover:text-blue-800 transition-all duration-300" href="#">Curation</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium font-headline tracking-tight hover:text-blue-800 transition-all duration-300" href="#">Pricing</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium font-headline tracking-tight hover:text-blue-800 transition-all duration-300" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:text-primary transition-colors">language</span>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm shadow-[0_10px_20px_-5px_rgba(0,80,203,0.3)] hover:scale-105 active:scale-95 transition-all">
+                    Get Started
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 lg:py-32 grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase">
+                    The Future of Professional Networking
+                </div>
+<h1 class="text-5xl lg:text-7xl font-headline font-extrabold tracking-tight leading-[1.1]">
+<span class="gradient-text">The Architectural Curator</span> of Talent
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                    Where students grow and companies thrive through expert curation. Move beyond the spreadsheet and experience professional networking as a high-end gallery.
+                </p>
+<div class="flex flex-wrap items-center gap-6 pt-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-headline font-extrabold text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                        Get Started
+                    </button>
+<a class="group flex items-center gap-2 font-headline font-bold text-primary" href="#">
+                        Explore Gallery
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative">
+<!-- Liquid Glass Card Visual -->
+<div class="relative z-10 p-8 rounded-xl liquid-glass border border-white/20 shadow-[0_20px_40px_-10px_rgba(0,24,73,0.06)]">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<div>
+<div class="text-lg font-headline font-bold">Curated Professional</div>
+<div class="text-sm text-slate-500 font-medium">Design Systems Engineer</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-4/5"></div>
+</div>
+<div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+<span>Visual Fidelity</span>
+<span>80%</span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-4">
+<div class="h-12 rounded-lg bg-surface-container-low"></div>
+<div class="h-12 rounded-lg bg-surface-container-low"></div>
+<div class="h-12 rounded-lg bg-surface-container-low"></div>
+</div>
+</div>
+</div>
+<!-- Floating Decorative Element -->
+<div class="absolute -top-12 -right-12 w-48 h-48 rounded-3xl bg-gradient-to-br from-primary to-primary-container opacity-10 rotate-12 -z-10"></div>
+<div class="absolute -bottom-8 -left-8 p-6 rounded-2xl liquid-glass shadow-lg z-20 hidden md:block">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
+</div>
+<span class="text-sm font-bold">+12 Matches Today</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Proposition Section -->
+<section class="max-w-7xl mx-auto px-8 py-24">
+<div class="grid md:grid-cols-2 gap-12 lg:gap-24">
+<!-- For Students -->
+<div class="group p-12 rounded-xl bg-surface-container-low border border-transparent hover:bg-white hover:shadow-xl transition-all duration-500">
+<div class="w-14 h-14 rounded-2xl bg-primary-container/10 flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">brush</span>
+</div>
+<h3 class="text-3xl font-headline font-bold mb-4">Frame your potential</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                        Join a high-end gallery where your skills are curated for maximum impact. We help you transition from an applicant to an exhibit of excellence.
+                    </p>
+<div class="h-[1px] w-12 bg-primary/20 mb-8"></div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-sm font-medium text-slate-600">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Personalized skill framing
+                        </li>
+<li class="flex items-center gap-3 text-sm font-medium text-slate-600">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Direct gallery exhibition
+                        </li>
+</ul>
+</div>
+<!-- For Companies -->
+<div class="group p-12 rounded-xl bg-surface-container-low border border-transparent hover:bg-white hover:shadow-xl transition-all duration-500">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-container/10 flex items-center justify-center mb-8 text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+</div>
+<h3 class="text-3xl font-headline font-bold mb-4">Curated Clusters</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                        Access pre-vetted talent clusters designed for seamless integration into your existing architectural workflows. No more digging—only discovery.
+                    </p>
+<div class="h-[1px] w-12 bg-tertiary/20 mb-8"></div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-sm font-medium text-slate-600">
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Pre-vetted integration ready
+                        </li>
+<li class="flex items-center gap-3 text-sm font-medium text-slate-600">
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Workflow-aligned matching
+                        </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Features/Process Section (Vertical Timeline) -->
+<section class="bg-surface-container-low/50 py-32 rounded-xl">
+<div class="max-w-4xl mx-auto px-8">
+<div class="text-center mb-24">
+<h2 class="text-4xl font-headline font-extrabold mb-6">The Curation Process</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">Our methodology treats talent placement as a structural design challenge, ensuring long-term integrity.</p>
+</div>
+<div class="relative">
+<!-- Timeline Line -->
+<div class="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/30 via-primary/5 to-transparent hidden md:block"></div>
+<div class="space-y-24">
+<!-- Step 1 -->
+<div class="relative flex flex-col md:flex-row gap-12">
+<div class="absolute left-8 -translate-x-1/2 w-8 h-8 rounded-full bg-primary-container border-4 border-white hidden md:block"></div>
+<div class="md:pl-24">
+<div class="text-xs font-black text-primary uppercase tracking-[0.2em] mb-4">Phase 01</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Curation &amp; Profiling</h4>
+<div class="p-8 rounded-xl liquid-glass border border-white shadow-sm">
+<p class="text-on-surface-variant leading-relaxed">
+                                        We break down professional experience into granular architectural blocks, analyzing not just what you've done, but how you structurally approach problems.
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col md:flex-row gap-12">
+<div class="absolute left-8 -translate-x-1/2 w-8 h-8 rounded-full bg-primary-container border-4 border-white hidden md:block"></div>
+<div class="md:pl-24">
+<div class="text-xs font-black text-primary uppercase tracking-[0.2em] mb-4">Phase 02</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Tonal Layering Match</h4>
+<div class="p-8 rounded-xl liquid-glass border border-white shadow-sm">
+<p class="text-on-surface-variant leading-relaxed">
+                                        Using our proprietary tonal matching engine, we align talent with company cultures that share the same "visual and functional language."
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-col md:flex-row gap-12">
+<div class="absolute left-8 -translate-x-1/2 w-8 h-8 rounded-full bg-primary-container border-4 border-white hidden md:block"></div>
+<div class="md:pl-24">
+<div class="text-xs font-black text-primary uppercase tracking-[0.2em] mb-4">Phase 03</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Glassmorphic Integration</h4>
+<div class="p-8 rounded-xl liquid-glass border border-white shadow-sm">
+<p class="text-on-surface-variant leading-relaxed">
+                                        A seamless entry into your new team where the onboarding is as clear as glass, allowing for immediate transparency and collaboration.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Showcase Section -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-[800px] md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 rounded-xl liquid-glass border border-white/40 p-12 flex flex-col justify-end relative overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover -z-10 opacity-30 group-hover:scale-105 transition-transform duration-700" data-alt="modern minimalist office interior with floor to ceiling windows and soft blue morning light hitting concrete floors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaFghK2aNZkxUpdAGkacYhP4YN3tPCUpV-XDKRWDJpZSKJWMUv6UJDZGOvVA3sYQn2HWpwZyReeRbtBRWg4_-L7prDeGhWLKfL_A7gnEN2gtLx05sA4uD55ARnsX5tBpEahKw1HhsiTWt_19XbfDo2zTElLitvZyek7CuLoaxIpcOfhmib6Vo4suR_wpQBUs4INqHIWnskQOR3wyMaJ_tnw-EwI2zowCAtGaItF04pX79E1-yyl5TpgGg7VyVmiFxBew-F_TN1hy8"/>
+<div class="space-y-4">
+<div class="text-3xl font-headline font-extrabold">Professional Spaces</div>
+<p class="text-on-surface-variant max-w-sm">Curating talent for the world's most innovative design and architectural firms.</p>
+<button class="flex items-center gap-2 text-primary font-bold">View Collective <span class="material-symbols-outlined">north_east</span></button>
+</div>
+</div>
+<div class="md:col-span-2 rounded-xl bg-primary text-on-primary p-12 flex flex-col justify-between">
+<div class="text-4xl font-headline font-extrabold leading-tight">98% Retention in Curated Roles</div>
+<div class="text-sm font-bold uppercase tracking-widest opacity-60">Success Methodology</div>
+</div>
+<div class="md:col-span-1 rounded-xl bg-surface-container-high p-8 flex flex-col justify-center items-center text-center gap-4">
+<span class="material-symbols-outlined text-4xl text-primary">diversity_3</span>
+<div class="text-xl font-headline font-bold">12k+ Experts</div>
+</div>
+<div class="md:col-span-1 rounded-xl bg-surface-container-lowest p-8 flex flex-col justify-center items-center text-center gap-4 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-tertiary">verified</span>
+<div class="text-xl font-headline font-bold">Top 1% Vetted</div>
+</div>
+</div>
+</section>
+<!-- CTA Final -->
+<section class="max-w-5xl mx-auto px-8 py-32 text-center">
+<div class="relative p-16 rounded-xl bg-primary-fixed text-on-primary-fixed overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold mb-8">Ready to frame your future?</h2>
+<div class="flex flex-col md:flex-row items-center justify-center gap-6">
+<button class="bg-primary text-on-primary px-12 py-5 rounded-full font-headline font-extrabold text-xl shadow-xl hover:scale-105 transition-all">
+                        Join the Skillnest
+                    </button>
+<button class="px-12 py-5 rounded-full font-headline font-extrabold text-xl border-2 border-primary text-primary hover:bg-primary/5 transition-all">
+                        Request a Demo
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[3rem] bg-slate-50 dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="font-headline font-extrabold text-blue-700 dark:text-blue-400 text-2xl">Skillnest</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-inter text-sm tracking-wide uppercase text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy</a>
+<a class="font-inter text-sm tracking-wide uppercase text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms</a>
+<a class="font-inter text-sm tracking-wide uppercase text-slate-500 hover:text-blue-600 transition-colors" href="#">Contact</a>
+<a class="font-inter text-sm tracking-wide uppercase text-slate-500 hover:text-blue-600 transition-colors" href="#">Intelligence</a>
+</div>
+<div class="text-slate-500 font-inter text-xs tracking-widest uppercase text-center md:text-right">
+                © 2024 Skillnest. Curating the future of talent.
+            </div>
+</div>
+</footer>
+</body></html>

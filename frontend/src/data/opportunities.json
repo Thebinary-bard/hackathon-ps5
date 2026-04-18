@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Developer",
+    "company": "TechCorp Inc.",
+    "location": "Remote",
+    "matchPercentage": 92,
+    "description": "Looking for a passionate React developer to join our core product team. You'll be working on high-performance interfaces.",
+    "skills": ["React", "TypeScript", "Tailwind CSS"],
+    "salaryStr": "$80k - $120k / yr",
+    "logoImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDTnvTfzoXinWS9hFh338u5x0TyItA1gXcMUkz5-M_iJIpGhnq3tDOvC2YETmZj4mzPzUmTt0TrZTBeIccOlgYpRMnmWZjPfysxHgqY2lrbyTzt4bbHmQpkLns6Gf5FzRX0yfnN8Svax_5P1r0CVtr5IefGqYLKMpnizCgWJWiRUIMPapUbeEBE6yfLk6fjJmNufCfkSZLScdLR26XcA5C59QniJRFJXjEUjUucnfI9BKMhApQP1ERtYqGmbtD3JtcsnQtOGU5RtmNb",
+    "logoAlt": "minimalist geometric blue and white technology company logo on stark white background"
+  },
+  {
+    "id": 2,
+    "title": "UX/UI Designer",
+    "company": "DesignStudio",
+    "location": "New York",
+    "matchPercentage": 88,
+    "description": "Join our award-winning design team to craft intuitive and beautiful digital experiences for global brands.",
+    "skills": ["Figma", "Prototyping", "User Research"],
+    "salaryStr": "$75k - $110k / yr",
+    "logoImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuA6U2SiLEsJhsB8DfquM1fuis5RLf3K5F91QO8oYwldcrkBq6W3_5kXdKI5wZ_zjabHF081NBqL6h7mXcc5Z4Xt_p-xe923FvQi1GiUU1r0UFjGqz296ZIIA89w10CVAKKodOjgxLa_ly9pVRkCFJDMYq1khiaCRogd2ZYApVKZ4DUrstwCfLQtW2DeqGKWYYNQW9lB0gE8nScg5OoLIZ4Ny6evA0P3HVfMdNE7Lj4f1bVNg-FwO8mOmmSXhuVnDshuwhu7jkfsrbeC",
+    "logoAlt": "sleek modern black typography logo design for a creative agency on bright white background"
+  },
+  {
+    "id": 3,
+    "title": "Data Analyst",
+    "company": "CloudMetrics",
+    "location": "San Francisco (Hybrid)",
+    "matchPercentage": 85,
+    "description": "Help us turn complex data sets into actionable insights. Strong analytical skills and experience with modern BI tools required.",
+    "skills": ["SQL", "Python", "Tableau"],
+    "salaryStr": "$85k - $130k / yr",
+    "logoIcon": "cloud"
+  }
+]
