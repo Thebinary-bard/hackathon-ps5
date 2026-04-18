@@ -1,9 +1,9 @@
 import React from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
-import universalTasks from './data/student/tasks.json';
+import universalTasks from '../../data/student/tasks.json';
 import { Link, useParams, Navigate } from 'react-router-dom';
 
-export default function CompanyTasksDetail() {
+export default function StudentTaskDetailPage() {
   const { id } = useParams();
   const task = universalTasks.find(t => t.id === id);
 

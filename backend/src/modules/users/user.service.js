@@ -29,3 +29,12 @@ export const addSkillToUser = async (userId, skillName) => {
     await user.save();
     return user;
 };
+
+export const addPortfolioItemToUser = async (userId, project) => {
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+
+    user.portfolio.push(project);
+    await user.save();
+    return user;
+};

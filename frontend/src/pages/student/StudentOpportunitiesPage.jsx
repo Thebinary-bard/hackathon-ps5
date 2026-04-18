@@ -1,6 +1,6 @@
 import React from 'react';
 import StudentDashboardLayout from './StudentDashboardLayout';
-import jobOpportunities from './data/student/opportunities.json';
+import jobOpportunities from '../../data/student/opportunities.json';
 
 
 export default function StudentOpportunitiesPage() {

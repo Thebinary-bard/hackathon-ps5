@@ -2,6 +2,7 @@ import {
     getUserProfile,
     updateUserProfile,
     addSkillToUser,
+    addPortfolioItemToUser,
 } from "./user.service.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
@@ -32,6 +33,16 @@ export const addSkill = asyncHandler(async (req, res, next) => {
     res.json({
         success: true,
         message: "Skill added",
+        data: user,
+    });
+});
+
+export const addPortfolio = asyncHandler(async (req, res, next) => {
+    const user = await addPortfolioItemToUser(req.user.id, req.body);
+
+    res.json({
+        success: true,
+        message: "Portfolio item added",
         data: user,
     });
 });

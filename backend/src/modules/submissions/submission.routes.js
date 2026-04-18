@@ -1,16 +1,21 @@
 import express from "express";
 import {
-    createSubmission,
-    evaluate,
+    startTask,
+    trackAction,
+    trackEdit,
+    trackMessage,
+    submitTask,
+    getSubmissions,
 } from "./submission.controller.js";
 import { protect } from "../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-// 👨‍🎓 submit work
-router.post("/", protect, createSubmission);
-
-// 🧠 evaluate (can be auto-triggered later)
-router.post("/:id/evaluate", protect, evaluate);
+router.post("/start", protect, startTask);
+router.post("/action", protect, trackAction);
+router.post("/edit", protect, trackEdit);
+router.post("/message", protect, trackMessage);
+router.post("/submit", protect, submitTask);
+router.get("/", protect, getSubmissions);
 
 export default router;

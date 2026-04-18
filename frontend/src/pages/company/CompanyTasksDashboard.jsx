@@ -1,9 +1,50 @@
-import matchedStudents from './data/company/matchedStudents.json';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import matchedStudents from '../../data/company/matchedStudents.json';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CompanyDashboardLayout from './CompanyDashboardLayout';
 
 export default function CompanyTasksDashboard() {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        dueDate: '',
+        effort: 'Less than 10 hours'
+    });
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:5000/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    title: formData.title,
+                    description: formData.description,
+                    deadline: formData.dueDate,
+                    skill: 'Full-Stack', // Default or derived from effort
+                    difficulty: formData.effort.includes('10') ? 'easy' : 'medium'
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert('Task dispatched successfully!');
+                navigate('/company/dashboard');
+            }
+        } catch (error) {
+            console.error('Failed to dispatch task:', error);
+            alert('Failed to dispatch task.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <CompanyDashboardLayout>
             
@@ -13,7 +54,7 @@ export default function CompanyTasksDashboard() {
 <p className="font-body text-on-surface-variant text-base max-w-2xl">Create a new brief and assign it to your matched talent pool. Provide clear instructions to ensure successful delivery.</p>
 </header>
 {/* Bento Grid Layout */}
-<div className="grid grid-cols-12 gap-8">
+<form onSubmit={handleSubmit} className="grid grid-cols-12 gap-8">
 {/* Primary Form Area (Spans 8 columns) */}
 <div className="col-span-12 xl:col-span-8 flex flex-col gap-8">
 {/* Task Details Card */}
@@ -26,12 +67,26 @@ export default function CompanyTasksDashboard() {
 {/* Task Name Input */}
 <div>
 <label className="block font-label text-sm font-semibold text-on-surface-variant mb-2">Project Title</label>
-<input className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base" placeholder="e.g., Q3 Marketing Campaign Analytics" type="text"/>
+<input 
+    className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base" 
+    placeholder="e.g., Q3 Marketing Campaign Analytics" 
+    type="text"
+    value={formData.title}
+    onChange={(e) => setFormData({...formData, title: e.target.value})}
+    required
+/>
 </div>
 {/* Description/Instructions */}
 <div>
 <label className="block font-label text-sm font-semibold text-on-surface-variant mb-2">Detailed Instructions</label>
-<textarea className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base resize-none" placeholder="Provide background information, key deliverables, and specific formatting requirements..." rows="6"></textarea>
+<textarea 
+    className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base resize-none" 
+    placeholder="Provide background information, key deliverables, and specific formatting requirements..." 
+    rows="6"
+    value={formData.description}
+    onChange={(e) => setFormData({...formData, description: e.target.value})}
+    required
+></textarea>
 </div>
 {/* Attachments Area (Drag & Drop conceptual) */}
 <div className="border-2 border-dashed border-outline-variant/30 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:bg-surface-container-low/50 transition-colors cursor-pointer group/upload">
@@ -53,13 +108,22 @@ export default function CompanyTasksDashboard() {
 <div>
 <label className="block font-label text-sm font-semibold text-on-surface-variant mb-2">Due Date</label>
 <div className="relative">
-<input className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg pl-4 pr-10 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base appearance-none" type="date"/>
+<input 
+    className="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/50 border-0 rounded-lg pl-4 pr-10 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base appearance-none" 
+    type="date"
+    value={formData.dueDate}
+    onChange={(e) => setFormData({...formData, dueDate: e.target.value})}
+/>
 <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">calendar_today</span>
 </div>
 </div>
 <div>
 <label className="block font-label text-sm font-semibold text-on-surface-variant mb-2">Estimated Effort</label>
-<select className="w-full bg-surface-container-low text-on-surface border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base appearance-none">
+<select 
+    className="w-full bg-surface-container-low text-on-surface border-0 rounded-lg px-4 py-3 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 transition-colors font-body text-base appearance-none"
+    value={formData.effort}
+    onChange={(e) => setFormData({...formData, effort: e.target.value})}
+>
 <option>Less than 10 hours</option>
 <option>10 - 20 hours</option>
 <option>20 - 40 hours</option>
@@ -110,13 +174,17 @@ export default function CompanyTasksDashboard() {
 </div>
 {/* Action Button */}
 <div className="mt-auto pt-4">
-<button className="w-full bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-white font-headline font-bold text-base py-4 px-6 rounded-xl shadow-[0_8px_16px_-4px_rgba(0,80,203,0.3)] hover:shadow-[0_12px_24px_-4px_rgba(0,80,203,0.4)] hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
-<span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
-                        Dispatch Task
-                    </button>
+<button 
+    type="submit"
+    disabled={loading}
+    className="w-full bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-white font-headline font-bold text-base py-4 px-6 rounded-xl shadow-[0_8px_16px_-4px_rgba(0,80,203,0.3)] hover:shadow-[0_12px_24px_-4px_rgba(0,80,203,0.4)] hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2"
+>
+<span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>{loading ? 'sync' : 'send'}</span>
+                        {loading ? 'Dispatching...' : 'Dispatch Task'}
+</button>
 </div>
 </div>
-</div>
+</form>
 
         </CompanyDashboardLayout>
     );

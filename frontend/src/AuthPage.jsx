@@ -34,7 +34,15 @@ export default function AuthPage() {
       if (response.ok && data.success !== false) {
         localStorage.setItem('token', data.token);
         if (data.data) localStorage.setItem('user', JSON.stringify(data.data));
-        navigate(data.data?.role === 'business' || data.data?.role === 'company' || role === 'company' ? '/company/dashboard' : '/student/dashboard');
+        
+        const finalRole = data.data?.role || role;
+        if (finalRole === 'admin') {
+          navigate('/admin/dashboard');
+        } else if (finalRole === 'business' || finalRole === 'company') {
+          navigate('/company/dashboard');
+        } else {
+          navigate('/student/dashboard');
+        }
       } else {
         setError(data.message || 'Login failed');
       }

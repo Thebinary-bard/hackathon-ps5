@@ -1,9 +1,40 @@
-import assignedToWorkStudents from './data/company/assignedToWorkStudents.json';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import assignedToWorkStudents from '../../data/company/assignedToWorkStudents.json';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CompanyDashboardLayout from './CompanyDashboardLayout';
 
 export default function CompanyHiringDashboard() {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const candidate = assignedToWorkStudents[0];
+
+    const handleDecision = async (status) => {
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            // Mock gig ID or fetch real one
+            const gigId = '65f1a2b3c4d5e6f7a8b9c0d1'; 
+            const response = await fetch(`http://localhost:5000/api/gigs/${gigId}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ status })
+            });
+            const data = await response.json();
+            if (data.status === 'success' || data.success) {
+                alert(`Candidate ${status === 'completed' ? 'Approved' : 'Rejected'} successfully!`);
+                navigate('/company/dashboard');
+            }
+        } catch (error) {
+            console.error('Decision failed:', error);
+            alert('Failed to process hiring decision.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <CompanyDashboardLayout>
             
@@ -26,16 +57,10 @@ export default function CompanyHiringDashboard() {
 <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-container rounded-bl-full -mr-16 -mt-16 opacity-50"></div>
 <div className="flex flex-col items-center text-center relative z-10">
 <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-surface shadow-[0_40px_40px_-15px_rgba(0,24,73,0.06)]">
-    {assignedToWorkStudents[0].avatar ? (
-        <img alt={`${assignedToWorkStudents[0].name} portrait`} className="w-full h-full object-cover" src={assignedToWorkStudents[0].avatar}/>
-    ) : (
-        <div className="w-full h-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-headline font-bold text-4xl">
-            {assignedToWorkStudents[0].name.split(' ').map(n=>n[0]).join('').substring(0,2)}
-        </div>
-    )}
+        <img alt={`${candidate.name} portrait`} className="w-full h-full object-cover" src={candidate.avatar || `https://ui-avatars.com/api/?name=${candidate.name}&background=random`}/>
 </div>
-<h2 className="font-headline text-2xl font-bold text-on-surface mb-1">{assignedToWorkStudents[0].name}</h2>
-<p className="font-body text-on-surface-variant text-sm mb-4">{assignedToWorkStudents[0].major}</p>
+<h2 className="font-headline text-2xl font-bold text-on-surface mb-1">{candidate.name}</h2>
+<p className="font-body text-on-surface-variant text-sm mb-4">{candidate.major}</p>
 <div className="flex gap-2 flex-wrap justify-center mb-6">
 <span className="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label text-xs font-semibold">React</span>
 <span className="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label text-xs font-semibold">Figma</span>
@@ -44,7 +69,7 @@ export default function CompanyHiringDashboard() {
 <div className="w-full bg-surface-container-low rounded-lg p-4 text-left flex items-center justify-between">
 <div>
 <p className="font-label text-xs text-on-surface-variant mb-1">Match Score</p>
-<p className="font-headline text-2xl font-extrabold text-primary">{assignedToWorkStudents[0].matchScore}%</p>
+<p className="font-headline text-2xl font-extrabold text-primary">{candidate.matchScore}%</p>
 </div>
 <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
 <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>trending_up</span>
@@ -130,7 +155,11 @@ export default function CompanyHiringDashboard() {
 <p className="font-body text-sm text-on-surface-variant mb-8">Select an outcome for this candidate. This action will trigger automated communications based on your selection.</p>
 <div className="flex flex-col sm:flex-row gap-4">
 {/* Reject Button */}
-<button className="flex-1 bg-surface-container-highest text-on-surface hover:bg-surface-container-high transition-colors rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 group">
+<button 
+    onClick={() => handleDecision('rejected')}
+    disabled={loading}
+    className="flex-1 bg-surface-container-highest text-on-surface hover:bg-surface-container-high transition-colors rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 group"
+>
 <div className="flex items-center gap-2 mb-1">
 <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
 <span className="font-headline font-bold text-lg">Reject</span>
@@ -138,7 +167,11 @@ export default function CompanyHiringDashboard() {
 <span className="font-label text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Student gets: [Rejection Email &amp; Feedback]</span>
 </button>
 {/* Approve Button */}
-<button className="flex-1 bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-on-primary hover:brightness-110 transition-all rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 shadow-lg group">
+<button 
+    onClick={() => handleDecision('completed')}
+    disabled={loading}
+    className="flex-1 bg-gradient-to-br from-[#0050cb] to-[#0066ff] text-on-primary hover:brightness-110 transition-all rounded-xl py-4 px-6 flex flex-col items-center justify-center gap-1 shadow-lg group"
+>
 <div className="flex items-center gap-2 mb-1">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
 <span className="font-headline font-bold text-lg">Approve</span>

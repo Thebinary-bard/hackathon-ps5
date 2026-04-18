@@ -3,20 +3,24 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import LandingPage from './LandingPage';
 import AuthPage from './AuthPage';
-import StudentDashboardPage from './StudentDashboardPage';
-import StudentOpportunitiesPage from './StudentOpportunitiesPage';
-import StudentTasksOverview from './StudentTasksOverview';
-import StudentTaskSubmitPage from './StudentTaskSubmitPage';
-import StudentTaskSolvePage from './StudentTaskSolvePage';
-import StudentPracticeTasksPage from './StudentPracticeTasksPage';
-import StudentTaskDetailPage from './StudentTaskDetailPage';
-import StudentTaskResultPage from './StudentTaskResultPage';
-import CompanyDashboardPage from './CompanyDashboardPage';
-import CompanyStudentMatchesPage from './CompanyStudentMatchesPage';
-import CompanyTasksDashboard from './CompanyTasksDashboard';
-import CompanySubmissionReviewPage from './CompanySubmissionReviewPage';
-import CompanyHiringDashboard from './CompanyHiringDashboard';
 import OAuthCallback from './OAuthCallback';
+// Student Pages
+import StudentDashboardPage from './pages/student/StudentDashboardPage';
+import StudentOpportunitiesPage from './pages/student/StudentOpportunitiesPage';
+import StudentTasksOverview from './pages/student/StudentTasksOverview';
+import StudentTaskDetailPage from './pages/student/StudentTaskDetailPage';
+import StudentPracticeTasksPage from './pages/student/StudentPracticeTasksPage';
+import StudentTaskSolvePage from './pages/student/StudentTaskSolvePage';
+import StudentTaskSubmitPage from './pages/student/StudentTaskSubmitPage';
+import StudentTaskResultPage from './pages/student/StudentTaskResultPage';
+// Company Pages
+import CompanyDashboardPage from './pages/company/CompanyDashboardPage';
+import CompanyStudentMatchesPage from './pages/company/CompanyStudentMatchesPage';
+import CompanyTasksDashboard from './pages/company/CompanyTasksDashboard';
+import CompanySubmissionReviewPage from './pages/company/CompanySubmissionReviewPage';
+import CompanyHiringDashboard from './pages/company/CompanyHiringDashboard';
+// Admin Pages
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import './App.css';
 
 function ScrollToTop() {
@@ -47,11 +51,15 @@ export default function App() {
         <Route path="/student/tasks/:id/submit" element={<StudentTaskSubmitPage />} />
         <Route path="/student/tasks/:id/result" element={<StudentTaskResultPage />} />
         
+        {/* Company Routes */}
         <Route path="/company/dashboard" element={<CompanyDashboardPage />} />
         <Route path="/company/matches" element={<CompanyStudentMatchesPage />} />
         <Route path="/company/tasks" element={<CompanyTasksDashboard />} />
         <Route path="/company/reviews" element={<CompanySubmissionReviewPage />} />
         <Route path="/company/hiring" element={<CompanyHiringDashboard />} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       </Routes>
     </BrowserRouter>
   );

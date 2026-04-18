@@ -11,7 +11,31 @@ export default function OAuthCallback() {
     
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/student/dashboard');
+      
+      const fetchRole = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/api/users/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await response.json();
+          if (data.success) {
+            const role = data.data.role;
+            if (role === 'admin') {
+              navigate('/admin/dashboard');
+            } else if (role === 'business' || role === 'company') {
+              navigate('/company/dashboard');
+            } else {
+              navigate('/student/dashboard');
+            }
+          } else {
+            navigate('/auth');
+          }
+        } catch (error) {
+          console.error('OAuth profile fetch failed:', error);
+          navigate('/student/dashboard'); // Fallback
+        }
+      };
+      fetchRole();
     } else {
       navigate('/auth');
     }
