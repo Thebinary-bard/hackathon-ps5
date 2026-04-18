@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import userProfile from './data/userProfile.json';
+import userProfile from './data/student/userProfile.json';
 
 
 export default function StudentDashboardLayout({ children }) {
@@ -149,7 +149,11 @@ User Message: `;
           </Link>
           <Link className={getSidebarClass('/student/tasks')} to="/student/tasks">
             <span className="material-symbols-outlined">assignment</span>
-            <span>Tasks</span>
+            <span>Company tasks</span>
+          </Link>
+          <Link className={getSidebarClass('/student/practice')} to="/student/practice">
+            <span className="material-symbols-outlined">code</span>
+            <span>Practice tasks</span>
           </Link>
         </nav>
         <div className="px-6 pb-6 pt-4 space-y-2">

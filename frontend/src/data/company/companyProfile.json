@@ -1,0 +1,17 @@
+{
+  "companyType": "Startup / MSME",
+  "companyName": "Startup X",
+  "description": "Pioneering the next generation of professional talent curation by connecting innovative startups with top-tier university talent seamlessly.",
+  "metrics": {
+    "activeRoles": 24,
+    "activeRolesGrowth": "+12% this month",
+    "successfulMatches": 156
+  },
+  "billing": {
+    "cardType": "VISA",
+    "lastFour": "4242",
+    "expiry": "12/25",
+    "planName": "Pro Startup Plan",
+    "nextCycle": "Oct 1st"
+  }
+}

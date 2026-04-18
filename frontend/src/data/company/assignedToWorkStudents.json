@@ -1,0 +1,26 @@
+[
+  {
+    "id": 7,
+    "name": "Emma Thompson",
+    "major": "UX Engineering Intern",
+    "role": "UX Engineering Intern",
+    "matchScore": 94,
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuCTvKuU04dC7fB3QppNkAKO-V0UBIumJzBOD4Xmol4Xa-SSlZwqL3U4E-7x_o12vs6We447qsOWBRhh5jPSK-ngZZm6-SO_p4NBLYqdUXb2zVBCZBzqDhOKQjgfDHCIMDMWD6HVLR_R5I0aFONy8y26rBHUT1D6xfdMgMLeIkPUBF57yNS9bjag5A1vTtKGKirFi-wI1-A4gq-wFT4xCyM8ezY6mgJuPAu9u6-a075UHQjAUJMNBXbVMA98HvZ51V2t2whkU7_57iKo"
+  },
+  {
+    "id": 8,
+    "name": "Oliver Martinez",
+    "major": "Frontend Redesign",
+    "role": "Frontend Redesign",
+    "matchScore": 88,
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuAc_weoEQoxX1n-IwXgwRWzV-jlbXAMsXTIigJt4ZAsvBpAD159J_nYD7a6lX9P4Nqb8OLmspRB5AmUOCKAesxX2MrwAV9ncXNlcsxi-R0xcaC-akb8hgdGXWsuqVJjBtWrD-0QhrXmqeNkO7V34iHaBqxNedlF4HgAYfz-3_TFAhb9YrKzhVVKAyleJlQV9sFG2D4rivm5RGsKXR0xIDIR185DXEvNLjim3n2z1fvTsNS7xqc2cpa3SJdN7G46TyYOLGC0uf9J1yEu"
+  },
+  {
+    "id": 9,
+    "name": "Chloe Kim",
+    "major": "Market Analysis Report",
+    "role": "Market Analysis Report",
+    "matchScore": 95,
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuAE1VTDDJh25D4HjeiScolz_n23UaVIyQPMyuBUx9PwoNfRNJe0D9dO-VOe1qd7XgqClf1xFZI8mfUHFNtPcY040__P8irQLLlB96vEvIpxTnrG4t_DYUJ7XMJYq5fWYDAYIDtCI9wIRmUi81gxTQ4mN8BPMJWN_M3Q7hCIQyaIYFe5fET2arbDH8ifPF5Sm9Z9HpIvieDX4yHJyIB4PDHKwUTgw2cTInmJTkzMiEw74D8qZbBrLVRobhpUexRgGWqhDz0u_IPmD1Kx"
+  }
+]

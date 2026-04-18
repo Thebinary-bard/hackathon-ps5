@@ -1,0 +1,26 @@
+[
+  {
+    "id": 101,
+    "title": "Data Pipeline Architecture",
+    "company": "TechFlow Inc.",
+    "completedDate": "Oct 12, 2026",
+    "metrics": { "efficiency": "98%" },
+    "details": "Successfully implemented a scalable data pipeline using Apache Kafka and Spark. Reduced data latency by 45%. Reviewer noted excellent documentation and clean code structure."
+  },
+  {
+    "id": 102,
+    "title": "Frontend Component Library",
+    "company": "DesignHub",
+    "completedDate": "Sep 28, 2026",
+    "metrics": { "efficiency": "95%" },
+    "details": "Built a comprehensive React component library with Storybook integration. Ensured 100% WCAG accessibility compliance across all interactive elements."
+  },
+  {
+    "id": 103,
+    "title": "Machine Learning Model Tuning",
+    "company": "AIVentures",
+    "completedDate": "Sep 15, 2026",
+    "metrics": { "efficiency": "92%" },
+    "details": "Optimized hyperparameters for a Random Forest classifier reducing false positives by 18%. Used cross-validation to ensure model robustness."
+  }
+]

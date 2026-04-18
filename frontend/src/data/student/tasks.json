@@ -1,0 +1,116 @@
+[
+  {
+    "id": "TASK-8921",
+    "title": "AI Prompt Engineering Matrix",
+    "company": "TechCorp Inc.",
+    "companyLogoIcon": "robot",
+    "category": "Machine Learning",
+    "status": "In Progress",
+    "points": 850,
+    "complexity": "Hard",
+    "tags": ["LLM", "Prompting", "Python"],
+    "dueDate": "Tomorrow",
+    "progress": 45,
+    "description": "Design a comprehensive matrix of evaluation prompts for our internal LLM tool to test reasoning capabilities on edge cases. Ensure prompts are categorized defensively.",
+    "metrics": { "accuracy": "N/A", "latency": "N/A" },
+    "acceptanceCriteria": [
+      "Create at least 50 edge-case reasoning prompts.",
+      "Categorize them into logical defense segments.",
+      "Verify format using provided test script."
+    ],
+    "files": [
+      {
+        "name": "matrix.py",
+        "code": "import json\n\ndef generate_matrix():\n    # TODO: Implement dynamic reasoning grids\n    print(\"Initializing adversarial LLM grids...\")\n    return []\n\nif __name__ == '__main__':\n    generate_matrix()"
+      },
+      {
+        "name": "test_matrix.py",
+        "code": "import pytest\nfrom matrix import generate_matrix\n\ndef test_matrix_structure():\n    out = generate_matrix()\n    assert isinstance(out, list)"
+      }
+    ]
+  },
+  {
+    "id": "TASK-4509",
+    "title": "Frontend Performance Audit",
+    "company": "DesignStudio",
+    "companyLogoIcon": "speed",
+    "category": "Web Development",
+    "status": "Completed",
+    "points": 400,
+    "complexity": "Medium",
+    "tags": ["React", "Lighthouse", "Optimization"],
+    "completedDate": "Oct 12, 2026",
+    "progress": 100,
+    "description": "Audit the primary dashboard using Chrome Lighthouse. Identify rendering bottlenecks and provide a technical spec doc for code-splitting current Webpack chunks.",
+    "metrics": { "efficiency": "98%", "speedup": "2.4x" },
+    "feedback": "Exceptional analysis! The recommended dynamic imports lowered our TTFB massively.",
+    "acceptanceCriteria": [
+      "Run Lighthouse and achieve >90 performance score.",
+      "Document bottlenecks in audit.md.",
+      "Implement dynamic imports for heavy components."
+    ],
+    "files": [
+      {
+        "name": "audit.md",
+        "code": "# Performance Audit\n\n## Findings\n- Issue 1: Large vendor chunk.\n- Action: Implement React.lazy().\n- Result: Bundle size reduced to 800KB."
+      }
+    ]
+  },
+  {
+    "id": "TASK-6612",
+    "title": "GraphQL Schema Migration",
+    "company": "CloudMetrics",
+    "companyLogoIcon": "database",
+    "category": "Backend",
+    "status": "Assigned",
+    "points": 600,
+    "complexity": "Hard",
+    "tags": ["GraphQL", "Node.js", "PostgreSQL"],
+    "dueDate": "Next Week",
+    "progress": 0,
+    "description": "Migrate the legacy REST endpoints for the 'User Management' module into a unified GraphQL schema. Includes writing necessary resolvers and testing Apollo Server integrations.",
+    "metrics": {},
+    "acceptanceCriteria": [
+      "Define GraphQL User type globally.",
+      "Implement Query.users and Query.user.",
+      "Implement Mutation.updateUser with validation.",
+      "Achieve 95% test coverage."
+    ],
+    "files": [
+      {
+        "name": "schema.graphql",
+        "code": "type User {\n  id: ID!\n  name: String!\n  email: String!\n}\n\ntype Query {\n  users: [User!]!\n  user(id: ID!): User\n}"
+      },
+      {
+        "name": "resolvers.js",
+        "code": "const resolvers = {\n  Query: {\n    users: () => [],\n    user: (_, { id }) => null\n  }\n};\nmodule.exports = resolvers;"
+      }
+    ]
+  },
+  {
+    "id": "TASK-1104",
+    "title": "Design System Tokens Sync",
+    "company": "Innovatrix Labs",
+    "companyLogoIcon": "palette",
+    "category": "UI/UX",
+    "status": "Reviewing",
+    "points": 250,
+    "complexity": "Easy",
+    "tags": ["Figma", "CSS Variables", "Tailwind"],
+    "dueDate": "Today",
+    "progress": 95,
+    "description": "Map the new 'Liquid Glass' Figma design tokens into the project's tailwind.config.js and ensure all existing semantic colors are replaced accurately.",
+    "metrics": {},
+    "acceptanceCriteria": [
+      "Extract tokens from active Figma document.",
+      "Update tailwind.config.js colors config.",
+      "Replace legacy hardcoded colors in main CSS."
+    ],
+    "files": [
+      {
+        "name": "tailwind.config.js",
+        "code": "module.exports = {\n  theme: {\n    extend: {\n      colors: {\n        primary: '#0050cb',\n        surface: '#f6f3f2'\n      }\n    }\n  }\n}"
+      }
+    ]
+  }
+]
